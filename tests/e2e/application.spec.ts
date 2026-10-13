@@ -119,6 +119,7 @@ test('documents : note paginée et nomenclature', async ({ page }) => {
 
 test('robustesse : projet enregistré corrompu', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByText('CONFORME', { exact: true })).toBeVisible(); // attendre l'enregistrement initial (WebKit : effet tardif)
   await page.evaluate(() => localStorage.setItem('plancher-ec2-projet', '{ corrompu'));
   await page.reload();
   await expect(page.getByRole('status')).toContainText('illisible');
