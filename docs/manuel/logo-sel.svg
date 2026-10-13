@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 48" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <path d="M24 4 L44 14 L44 34 L24 44 L4 34 L4 14 Z" fill="rgba(58,155,213,0.08)"/>
+  <path d="M24 4 L44 14 L44 34 L24 44 L4 34 L4 14 Z" fill="none" stroke="#3a9bd5" stroke-width="2.5"/>
+  <path d="M4 14 L44 34 M4 34 L44 14 M24 4 L24 44" stroke="#3a9bd5" stroke-opacity="0.4" stroke-width="0.5"/>
+  <rect x="16" y="18" width="16" height="12" rx="2" fill="#3a9bd5"/>
+  <text x="24" y="27.6" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle">S.E.L.</text>
+  <text x="56" y="24" font-size="20" font-weight="900" letter-spacing="-1" fill="#0b111e">STRUCTURAL <tspan fill="#3a9bd5" font-weight="700">&amp;</tspan></text>
+  <text x="57" y="38" font-size="10" font-weight="700" letter-spacing="3.6" fill="#6b8aaa">ENGINEERING LABS</text>
+</svg>

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-primary: #3a9bd5;
+  --color-primary-dark: #2a7bb5;
+  --color-primary-light: #e8f4fc;
+}
+
+@layer base {
+  body { @apply bg-gray-50 font-sans text-gray-800; }
+}
+
+/* Note de calcul */
+.note-fond { background: #e5e7eb; min-height: 100vh; }
+.note-barre { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; background: #0b111e; color: #fff; }
+.note { max-width: 210mm; margin: 16px auto; background: #fff; padding: 14mm 14mm; font-size: 11.5px; line-height: 1.5; color: #111; }
+.note-cartouche { display: grid; grid-template-columns: 200px 1fr 190px; gap: 10px; align-items: center; border: 1.5px solid #0b111e; padding: 8px; }
+.note-logo svg { width: 190px; height: auto; }
+.note-visa { width: 100%; border-collapse: collapse; margin-top: -1.5px; }
+.note-visa td { border: 1px solid #0b111e; padding: 4px 8px; font-size: 10.5px; }
+.note-verdict { margin: 10px 0; padding: 6px 10px; border-radius: 4px; font-weight: 700; border: 1px solid; }
+.note-verdict.OK { background: #ecfdf5; border-color: #16a34a; color: #166534; }
+.note-verdict.KO { background: #fef2f2; border-color: #dc2626; color: #991b1b; }
+.note-verdict.NV { background: #f3f4f6; border-color: #6b7280; color: #374151; }
+.note-h2 { font-size: 14px; font-weight: 800; color: #0b111e; border-bottom: 2px solid #3a9bd5; margin: 18px 0 8px; padding-bottom: 2px; break-after: avoid; }
+.note h3 { font-weight: 700; margin: 8px 0 4px; }
+.note-eq { display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 10.5px; background: #f8fafc; border-left: 3px solid #3a9bd5; padding: 3px 8px; margin: 4px 0; break-inside: avoid; }
+.note-art { color: #6b7280; white-space: nowrap; font-family: var(--font-sans); }
+.note-t { width: 100%; border-collapse: collapse; margin: 6px 0; break-inside: avoid; }
+.note-t th, .note-t td { border: 1px solid #d1d5db; padding: 3px 6px; text-align: left; }
+.note-t th { background: #f3f7fb; }
+.note ul { list-style: disc; padding-left: 18px; }
+.note-bloc { break-inside: avoid; }
+.note-petit { font-size: 10px; color: #6b7280; }
+.note-pied { margin-top: 18px; border-top: 1px solid #d1d5db; padding-top: 6px; font-size: 9.5px; color: #6b7280; text-align: center; }
+.note svg { max-width: 100%; }
+
+@media print {
+  .no-print { display: none !important; }
+  body, .note-fond { background: #fff !important; }
+  .note { margin: 0; padding: 0; max-width: none; }
+  @page { size: A4; margin: 12mm; }
+}
+.note-garde { min-height: 240mm; break-after: page; }
+.note-titre { font-size: 22px; font-weight: 800; margin: 28mm 0 10mm; line-height: 1.25; }
+.note-titre span { font-size: 14px; font-weight: 500; color: #374151; }
+.note-sommaire { list-style: decimal; padding-left: 20px; columns: 2; }
+.note-sommaire a, .note-listes a { color: #1d4ed8; text-decoration: none; }
+.note-listes { break-after: page; }
+.note-fig { margin: 8px 0; break-inside: avoid; }
+.note-fig figcaption, .note-legende { font-size: 10px; color: #374151; font-style: italic; text-align: center; margin: 2px 0; }
+.note-tab { break-inside: avoid; }
+.note-annexe td { font-family: var(--font-mono); font-size: 9.5px; word-break: break-all; }
+@media print { .note-plans { break-before: page; } .plan-feuille { break-after: page; width: 100%; } }

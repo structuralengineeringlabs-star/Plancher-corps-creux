@@ -1,0 +1,42 @@
+{
+  "name": "plancher-corps-creux-ec2",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3002 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit && eslint .",
+    "test": "vitest run",
+    "validation": "tsx scripts/validation.ts",
+    "reference": "tsx scripts/exporter-moteur.ts && python3 scripts/reference/plancher_reference.py > scripts/reference/references.json",
+    "site": "vite build --base /tools/plancher-corps-creux/ --outDir dist-sel && echo 'Construction pour sel-apps prête : dist-sel/'",
+    "e2e": "playwright test --grep-invert \"captures du manuel\"",
+    "manuel": "playwright test manuel --project=bureau",
+    "verifier": "npm run lint && npm test && npm run validation && npm run e2e"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^17.13.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.4"
+  }
+}
