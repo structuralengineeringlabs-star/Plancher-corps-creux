@@ -35,7 +35,7 @@ export default function App() {
       <header className="bg-[#0b111e] text-white px-4 py-2 flex items-center gap-3 flex-wrap">
         <div className="h-8 w-40 shrink-0" dangerouslySetInnerHTML={{ __html: selLogoSVG({ texte: '#ffffff', fondIcone: 'rgba(58,155,213,0.15)' }) }} />
         <div className="flex-1 min-w-[180px]">
-          <h1 className="text-[14px] font-bold leading-tight">Plancher à corps creux EC2</h1>
+          <h1 className="text-[14px] font-bold leading-tight">Calculette EC2 Plancher Corps Creux</h1>
           <p className="text-[11px] text-[#6b8aaa]">{p.identification.projet} · {p.projet.planchers.length} plancher(s) · v{APP_VERSION}</p>
         </div>
         <nav aria-label="Projet" className="flex flex-wrap gap-2 text-[12.5px]">
