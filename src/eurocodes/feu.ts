@@ -22,6 +22,8 @@ export const TAB_5_6: Record<number, Couples> = {
 };
 /** Épaisseur d'âme minimale bw, classe WA (tableaux 5.5 et 5.6). */
 export const BW_MIN_WA: Record<number, number> = { 30: 80, 60: 100, 90: 110, 120: 130, 180: 150, 240: 170 };
+/** Épaisseur minimale hs d'une dalle pleine (critères E et I), tableau 5.8, colonne 1 (appuis simples, béton de granulats siliceux). */
+export const HS_MIN_DALLE_PLEINE: Record<number, number> = { 30: 60, 60: 80, 90: 100, 120: 120, 180: 150, 240: 175 };
 export const DUREES_FEU = [30, 60, 90, 120, 180, 240];
 
 /** Distance a requise pour une largeur b (null si b < bmin de la première colonne). */

@@ -1,5 +1,13 @@
 # Journal des modifications
 
+## v1.1.1 — Feu : ligne indicative pour la dalle de compression
+
+- Option feu : nouvelle vérification **FEU-I**, non bloquante, qui compare l'épaisseur hf de la dalle de compression à l'épaisseur minimale
+  d'une dalle pleine (EN 1992-1-2 §5.7.2, tableau 5.8 : 60 / 80 / 100 / 120 / 150 / 175 mm pour R30 à R240). Les entrevous n'étant pas pris en compte,
+  un écart n'est pas un défaut en soi : la tenue du plancher relève alors de l'évaluation du fabricant d'entrevous.
+- Mention dans les observations, la note de calcul, le périmètre du verdict, le manuel et le guide ; registre R-08 mis à jour. 116 tests unitaires.
+- Les tableaux des dalles nervurées (§5.7) ne sont pas intégrés (texte de la norme non disponible, dalles coulées en place).
+
 ## v1.1.0 — Lot 2 : plans A3 et DXF, résistance au feu, guide PDF
 
 **Plans d'exécution (étape 4)**
@@ -12,7 +20,7 @@
   largeur bmin, épaisseur d'âme (classe WA), distance a de l'axe des barres au parement, barres d'angle d'un lit unique (a + 10 mm).
 - Vérifications bloquantes dans le verdict, enrobage requis indiqué, section dédiée dans la note de calcul, ligne dans les plans.
 - Non couvert (signalé dans le périmètre) : protection des entrevous, critères E et I, dalle de compression, tableaux des dalles nervurées (§5.7).
-- Cahier de validation : 4 cas (R1 à R4) ; 115 tests unitaires et 40 cas de validation.
+- Cahier de validation : 4 cas (R1 à R4) ; 116 tests unitaires et 40 cas de validation.
 
 **Documentation**
 - Guide d'utilisation PDF (`docs/guide/`), généré par `npm run guide` à partir du moteur et de captures de l'application.

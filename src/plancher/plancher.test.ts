@@ -266,10 +266,22 @@ describe('Résistance au feu (option, EN 1992-1-2)', () => {
   it('poutrelle continue R60 (bw 120, a = 37 mm) : conforme, vérifications bloquantes présentes', () => {
     const r = cas({ feu: true, resistanceFeu: 60 });
     const f = r.verifications.filter(v => v.groupe === 'Feu');
-    expect(f.map(v => v.id)).toEqual(['FEU-B', 'FEU-BW', 'FEU-A', 'FEU-C']);
-    expect(f.every(v => v.ok && v.bloquant)).toBe(true);
+    expect(f.map(v => v.id)).toEqual(['FEU-B', 'FEU-BW', 'FEU-A', 'FEU-C', 'FEU-I']);
+    expect(f.filter(v => v.id !== 'FEU-I').every(v => v.ok && v.bloquant)).toBe(true);
     expect(r.verdict).toBe('OK');
     expect(r.perimetre.verifie.some(x => x.includes('R60'))).toBe(true);
+  });
+  it("FEU-I : isolation indicative de la dalle (tableau 5.8), jamais bloquante", () => {
+    const hs = { 30: 60, 60: 80, 90: 100, 120: 120, 180: 150, 240: 175 } as const;
+    for (const R of [30, 60, 120, 240] as const) {
+      const bas = cas({ feu: true, resistanceFeu: R, hf: hs[R] - 5 }).verifications.find(v => v.id === 'FEU-I')!;
+      const haut = cas({ feu: true, resistanceFeu: R, hf: hs[R] }).verifications.find(v => v.id === 'FEU-I')!;
+      expect(bas.ok).toBe(false); expect(haut.ok).toBe(true);
+      expect(bas.bloquant).toBe(false);
+    }
+    const r = cas({ feu: true, resistanceFeu: 60, hf: 50 });
+    expect(r.verdict).toBe('OK');
+    expect(r.avertissements.some(a => a.includes('tableau 5.8'))).toBe(true);
   });
   it('poutrelle isostatique R60 : a = 37 < 40 mm → non conforme, enrobage requis indiqué', () => {
     const r = cas({ appui: 'simple', portee: 3.2, feu: true, resistanceFeu: 60 });

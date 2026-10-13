@@ -4,6 +4,7 @@
  */
 import type { ResultatPlancher } from '../plancher/calcul';
 import { fr } from '../plancher/calcul';
+import { HS_MIN_DALLE_PLEINE } from '../eurocodes/feu';
 import { libelleAcier, libelleBeton } from '../plancher/materiaux';
 import type { Identification } from './store';
 import { CoupeTransversale, Diagramme, Elevation } from './dessins';
@@ -97,7 +98,7 @@ export default function Note({ r, id, niveau, onFermer }: { r: ResultatPlancher;
       </tbody></table>)}
     </> },
     ...(feu ? [{ titre: 'Résistance au feu', contenu: (o: Parameters<SectionNote['contenu']>[0]) => <>
-      <p>Valeurs tabulées de la NF EN 1992-1-2 (§5.6) : la nervure est assimilée à une poutre exposée sur trois faces ({feu.tableau === '5.5' ? 'tableau 5.5, appuis simples' : 'tableau 5.6, poutre continue'}), durée R{feu.R}. La protection des entrevous et les critères E et I ne sont pas pris en compte.</p>
+      <p>Valeurs tabulées de la NF EN 1992-1-2 (§5.6) : la nervure est assimilée à une poutre exposée sur trois faces ({feu.tableau === '5.5' ? 'tableau 5.5, appuis simples' : 'tableau 5.6, poutre continue'}), durée R{feu.R}. La protection des entrevous n'est pas prise en compte. Critères E et I, à titre indicatif : épaisseur de la dalle de compression hf = {fr(e.hf, 0)} mm comparée à l'épaisseur minimale d'une dalle pleine hs = {fr(HS_MIN_DALLE_PLEINE[feu.R], 0)} mm (tableau 5.8, §5.7.2) — {e.hf >= HS_MIN_DALLE_PLEINE[feu.R] ? 'atteinte' : 'non atteinte : la tenue du plancher dépend alors des entrevous (évaluation du fabricant)'}.</p>
       {complet && o.eq('§5.6.3', <>a = cnom + Φétrier + Φ/2 = {fr(r.mat.cNom, 0)} + {e.phiEtrier} + {fr(e.phiTravee / 2, 0)} = {fr(feu.a, 1)} mm ; barres d'angle : asd ≥ a + 10 mm si bw est inférieure à la colonne retenue du tableau</>)}
       {o.tab('Valeurs tabulées', <table className="note-t"><thead><tr><th>Grandeur</th><th>Fourni</th><th>Exigé</th></tr></thead><tbody>
         <tr><td>Largeur de nervure bw (mm)</td><td>{fr(feu.b, 0)}</td><td>≥ {fr(feu.bmin, 0)} (bmin) et ≥ {fr(feu.bwMin, 0)} (classe WA)</td></tr>

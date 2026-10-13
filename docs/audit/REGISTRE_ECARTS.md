@@ -46,4 +46,4 @@ Versions auditées : « Aciers-Floor » v2.4 (export Google AI Studio, fichier `
 | R-05 | Méthode forfaitaire : continuité des inerties et rapport des portées voisines non contrôlés (seul Q ≤ max(2G ; 5) l'est) | Information utilisateur |
 | R-06 | Résistance au feu (EN 1992-1-2), planches A3 et DXF, guide PDF | **Levé en v1.1.0** (lot 2) : tableaux 5.5/5.6 de la nervure ; limites résiduelles : entrevous, critères E et I, dalle, tableaux §5.7 non traités (R-08) |
 | R-07 | Navigateurs : Chromium testé (4 formats d'écran) ; Firefox et Safari non testés | `PW_TOUS_NAVIGATEURS=1` |
-| R-08 | Feu : nervure traitée comme une poutre (tableaux 5.5/5.6) sans protection des entrevous ; tableaux des dalles nervurées (§5.7), critères E et I, dalle de compression non traités | À valider avec un spécialiste feu si la résistance au feu est déterminante |
+| R-08 | Feu : nervure traitée comme une poutre (tableaux 5.5/5.6) sans protection des entrevous ; tableaux des dalles nervurées (§5.7) non traités ; critères E et I réduits à une ligne indicative (hf comparée à hs du tableau 5.8, v1.1.1) | À valider avec un spécialiste feu si la résistance au feu est déterminante |

@@ -93,8 +93,7 @@ const SECTIONS: { titre: string; corps: string }[] = [
     ])}
     <p class="ex"><strong>Lecture.</strong> Le même plancher en poutrelle <em>isostatique</em> n'est plus conforme à R60 : a requis ${fr(feuIso.feu!.aRequis!, 1)} mm et ${fr(feuIso.feu!.aCoinRequis!, 1)} mm pour les barres d'angle, alors que a = ${fr(feuIso.feu!.a, 1)} mm ;
     l'application indique l'enrobage nominal à retenir (cnom ≥ ${feuIso.feu!.cnomRequis} mm). En R90 avec bw = ${feu90.entree.bw} mm, le tableau n'est pas applicable (bw &lt; bmin = ${fr(feu90.feu!.bmin, 0)} mm) : élargir l'âme.</p>
-    <p><strong>Non couvert</strong> (rappelé dans le périmètre du verdict, la note et les observations) : protection éventuelle apportée par les entrevous, critères d'étanchéité (E) et d'isolation (I) de la dalle,
-    dalle de compression, tableaux des dalles nervurées (§5.7) et, en poutrelle continue, armatures sur appui. La note de calcul comporte une section « Résistance au feu » et les plans une ligne dédiée.</p>` },
+    <p><strong>Non couvert</strong> (rappelé dans le périmètre du verdict, la note et les observations) : protection éventuelle apportée par les entrevous, tableaux des dalles nervurées (§5.7) ; les critères d'étanchéité (E) et d'isolation (I) ne font l'objet que d'une ligne indicative (hf comparée à l'épaisseur d'une dalle pleine, tableau 5.8, non bloquante) et, en poutrelle continue, armatures sur appui. La note de calcul comporte une section « Résistance au feu » et les plans une ligne dédiée.</p>` },
   { titre: 'Résultats', corps: `
     ${img('03-resultats-synthese.png', 'Étape 3 : synthèse (coupes, élévation, nomenclature)', 92)}
     <p>La <strong>synthèse</strong> montre les coupes en travée et sur appui, l'élévation de la poutrelle (ancrages, chapeaux, étriers à l'espacement retenu) et la nomenclature.

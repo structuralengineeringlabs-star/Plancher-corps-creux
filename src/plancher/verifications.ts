@@ -3,7 +3,7 @@
  */
 import type { ResultatPlancher } from './calcul';
 import type { Verdict, Verification } from './types';
-import { TAB_5_5, TAB_5_6 } from '../eurocodes/feu';
+import { TAB_5_5, TAB_5_6, HS_MIN_DALLE_PLEINE } from '../eurocodes/feu';
 
 type Partiel = Omit<ResultatPlancher, 'verifications' | 'verdict' | 'perimetre'>;
 
@@ -69,7 +69,9 @@ export function construireVerifications(r: Partiel): { verifications: Verificati
     V({ id: 'FEU-BW', groupe: 'Feu', libelle: `Épaisseur minimale de l'âme, classe WA (${R})`, valeur: `bw = ${fr(f.b, 0)} mm`, limite: `≥ ${fr(f.bwMin, 0)} mm`, ok: f.b >= f.bwMin, bloquant: true, ref: `EN 1992-1-2 §5.6.3, ${tab}` });
     V({ id: 'FEU-A', groupe: 'Feu', libelle: `Distance de l'axe des armatures de travée au parement (${R})`, valeur: `a = ${fr(f.a, 1)} mm`, limite: f.aRequis === null ? 'non définie (bw < bmin)' : `≥ ${fr(f.aRequis, 1)} mm${f.cnomRequis !== null ? ` (cnom ≥ ${f.cnomRequis} mm)` : ''}`, ok: f.aRequis !== null && f.a >= f.aRequis - 1e-9, bloquant: true, ref: `EN 1992-1-2 §5.6.3, ${tab}` });
     if (f.aCoinRequis !== null) V({ id: 'FEU-C', groupe: 'Feu', libelle: `Barres d'angle d'un lit unique (${R})`, valeur: `asd = ${fr(f.aCoinFourni ?? 0, 1)} mm`, limite: `≥ a + 10 = ${fr(f.aCoinRequis, 1)} mm (bw < ${fr(f.tableau === '5.5' ? TAB_5_5[f.R][2][0] : TAB_5_6[f.R][1][0], 0)} mm)`, ok: (f.aCoinFourni ?? 0) >= f.aCoinRequis - 1e-9, bloquant: true, ref: `EN 1992-1-2 §5.6.3(2), ${tab}` });
-    r.avertissements.push(`Résistance au feu ${R} : nervure assimilée à une poutre exposée sur trois faces (${tab}), sans prise en compte de la protection des entrevous ni des critères d'étanchéité (E) et d'isolation (I) de la dalle${cont ? " ; armatures sur appui (répartition sur 0,3·leff) non vérifiées" : ''}.`);
+    const hsMin = HS_MIN_DALLE_PLEINE[f.R];
+    V({ id: 'FEU-I', groupe: 'Feu', libelle: `Dalle de compression : isolation et étanchéité, à titre indicatif (${R})`, valeur: `hf = ${fr(e.hf, 0)} mm`, limite: `≥ hs = ${fr(hsMin, 0)} mm d'une dalle pleine (entrevous non pris en compte)`, ok: e.hf >= hsMin, bloquant: false, ref: 'EN 1992-1-2 §5.7.2, tableau 5.8' });
+    r.avertissements.push(`Résistance au feu ${R} : nervure assimilée à une poutre exposée sur trois faces (${tab}), sans prise en compte de la protection des entrevous ; critères d'étanchéité (E) et d'isolation (I) de la dalle de compression : comparaison indicative à l'épaisseur d'une dalle pleine (tableau 5.8), la tenue réelle dépendant des entrevous (évaluation du fabricant)${cont ? " ; armatures sur appui (répartition sur 0,3·leff) non vérifiées" : ''}.`);
   }
 
   // --- Avertissements -------------------------------------------------------------------------------------------------
@@ -93,7 +95,7 @@ export function construireVerifications(r: Partiel): { verifications: Verificati
     'Dalle de compression : treillis soudé de répartition et flexion transversale',
     'Charges concentrées, cloisons linéaires isolées, poinçonnement',
     'Étude détaillée de la continuité (travées inégales, appuis de rive)',
-    ...(r.feu ? ['Feu : critères E et I, dalle de compression, entrevous, tableaux des dalles nervurées (§5.7) ; séisme (EN 1998)'] : ['Résistance au feu (EN 1992-1-2), séisme (EN 1998)']),
+    ...(r.feu ? ['Feu : protection des entrevous, critères E et I au-delà de la comparaison indicative de hf, tableaux des dalles nervurées (§5.7) ; séisme (EN 1998)'] : ['Résistance au feu (EN 1992-1-2), séisme (EN 1998)']),
     'Appuis (poutres, murs) et vérification des entrevous',
   ];
   return { verifications: v, verdict, perimetre: { verifie, nonVerifie } };

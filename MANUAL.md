@@ -44,7 +44,8 @@ Unités internes : N, mm, MPa, N·mm (1 kN/m = 1 N/mm). Saisie : m (portée, ent
 - Méthode des valeurs tabulées appliquée à la nervure, assimilée à une poutre exposée sur trois faces : tableau 5.5 (isostatique) ou 5.6 (continue), R30 à R240, interpolation linéaire de a selon bw entre les colonnes.
 - Distance de l'axe des barres de travée au parement : a = cnom + Φétrier + Φ/2 (un seul lit) ; barres d'angle : asd = a (même distance au parement latéral, base de l'étrier triangulaire à cnom du nu) ≥ a_requis + 10 mm si bw est inférieure à la colonne retenue du tableau.
 - Contrôles bloquants : bw ≥ bmin, bw ≥ bw,min (classe WA), a ≥ a_requis, asd ≥ a_requis + 10. L'enrobage nominal requis est indiqué.
-- Non couvert : protection des entrevous, critères E et I, dalle de compression, tableaux des dalles nervurées (§5.7), armatures sur appui d'une poutrelle continue.
+- Critères E et I, à titre indicatif (ligne FEU-I, jamais bloquante) : hf comparée à l'épaisseur minimale hs d'une dalle pleine (tableau 5.8, §5.7.2 : R30 60 mm, R60 80, R90 100, R120 120, R180 150, R240 175). Un hf inférieur n'est pas un défaut en soi : la tenue du plancher dépend alors des entrevous (évaluation du fabricant, norme produit EN 15037-2).
+- Non couvert : protection des entrevous, tableaux des dalles nervurées (§5.7, dalles coulées en place), armatures sur appui d'une poutrelle continue.
 
 ## 8. Plans d'exécution A3
 - Planche 1 : élévation à l'échelle 1/e (plus petite échelle normalisée telle que (L + 2·lbd)/e tienne dans la largeur utile), coupes en travée et sur appui, détail de l'étrier ; planche 2 : nomenclature, métré, hypothèses.
