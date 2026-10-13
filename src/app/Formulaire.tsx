@@ -34,7 +34,7 @@ export function EtapeDonnees({ e, maj, erreurs, r }: Props) {
       <div>
         <Groupe titre="Charges">
           <Liste label="Catégorie d'usage" valeur={e.categorie} options={CATEGORIES.map(c => ({ v: c.code, l: c.code === 'perso' ? 'Personnalisée' : `${c.code} (${fr(categorie(c.code, e.annexe).qk ?? 0, 1)} kN/m²)` }))} onChange={v => maj('categorie', v)}
-            aide="Valeurs recommandées de l'EN 1991-1-1 (tableau 6.2) et coefficients ψ de l'EN 1990. Avec « Annexe France » (paramètres nationaux, étape 2), la catégorie A passe à 1,5 kN/m² ; pour les autres catégories de l'Annexe nationale, choisir « Personnalisée »." />
+            aide="Valeurs recommandées de l'EN 1991-1-1 (tableau 6.2) et coefficients ψ de l'EN 1990. Avec « Annexe France » (paramètres nationaux, étape 2), les valeurs de qk passent à celles de l'Annexe nationale (tableau 6.2NF : A 1,5 ; B 2,5 ; C1 2,5 ; C2 et C3 4,0 ; D 5,0 kN/m²)." />
           {cat.code === 'perso'
             ? <>
               <ChampNombre label={<>q<sub>k</sub></>} unite="kN/m²" valeur={e.qkPerso} onChange={v => maj('qkPerso', v)} erreur={err('qkPerso')} />
@@ -77,7 +77,7 @@ export function EtapeArmatures({ e, maj, erreurs, r, appliquer }: Props & { appl
           <Liste label="Béton" valeur={e.fck} options={CLASSES_BETON.map(c => ({ v: c.fck, l: c.label }))} onChange={v => maj('fck', v)} />
           <Liste label="Acier" valeur={e.fyk} options={[{ v: 500, l: 'B500' }, { v: 400, l: 'B400' }]} onChange={v => maj('fyk', v)} />
           <Liste label="Paramètres nationaux" valeur={e.annexe} options={[{ v: 'EC2', l: 'Valeurs recommandées' }, { v: 'FR', l: 'Annexe France' }]} onChange={v => maj('annexe', v)}
-            aide="Annexe France : qk de la catégorie A = 1,5 kN/m² (NF EN 1991-1-1/NA, tableau 6.2) et wmax en XD/XS (tableau 7.1NF). Les autres paramètres restent ceux de l'EN." />
+            aide="Annexe France : qk du tableau 6.2 de la NF EN 1991-1-1/NA et wmax en XD/XS (tableau 7.1NF). Les autres paramètres restent ceux de l'EN." />
           <Liste label="Exposition" valeur={e.exposition} options={EXPOSITIONS.map(v => ({ v, l: v }))} onChange={v => maj('exposition', v)} />
           <p className="text-[11.5px] text-gray-600">Enrobage nominal : <strong>{fr(r.mat.cNom, 0)} mm</strong> ({e.enrobageMode === 'calcule' ? `calculé, ${e.exposition} S${r.mat.classeS}` : 'saisi'})</p>
           <Case label="Vérifier la résistance au feu (EN 1992-1-2)" valeur={e.feu} onChange={v => maj('feu', v)} aide="Valeurs tabulées de la nervure assimilée à une poutre (tableaux 5.5 et 5.6) : largeur, distance de l'axe des armatures au parement. Protection des entrevous, critères E et I et dalle de compression non vérifiés." />

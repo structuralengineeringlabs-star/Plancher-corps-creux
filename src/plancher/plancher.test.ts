@@ -107,13 +107,15 @@ describe('Charges', () => {
     expect(charges({ ...PAR_DEFAUT, poidsEntrevous: 1 }).poidsEntrevousAuto).toBe(false);
     expect(charges({ ...PAR_DEFAUT, poidsEntrevous: 1 }).poidsEntrevous).toBe(1);
   });
-  it("Annexe France : catégorie A à 1,5 kN/m² (NF EN 1991-1-1/NA), autres catégories inchangées", () => {
+  it("Annexe France : qk du tableau 6.2 de la NF EN 1991-1-1/NA, catégorie personnalisée inchangée", () => {
     const ec = charges({ ...PAR_DEFAUT, annexe: 'EC2' }), fr = charges({ ...PAR_DEFAUT, annexe: 'FR' });
     expect(ec.qk).toBe(2.0);
     expect(fr.qk).toBe(1.5);
     expect(fr.q).toBeCloseTo(1.5 * PAR_DEFAUT.entraxe, 12);
     expect(fr.psi2).toBe(0.3);
-    expect(charges({ ...PAR_DEFAUT, annexe: 'FR', categorie: 'B' }).qk).toBe(3.0);
+    const attendu: Record<string, number> = { B: 2.5, C1: 2.5, C2: 4.0, C3: 4.0, D1: 5.0, D2: 5.0, E1: 7.5 };
+    for (const [c, q] of Object.entries(attendu)) expect(charges({ ...PAR_DEFAUT, annexe: 'FR', categorie: c as never }).qk, c).toBe(q);
+    expect(charges({ ...PAR_DEFAUT, annexe: 'EC2', categorie: 'B' }).qk).toBe(3.0);
     expect(charges({ ...PAR_DEFAUT, annexe: 'FR', categorie: 'perso', qkPerso: 2.5 }).qk).toBe(2.5);
   });
   it('catégorie personnalisée', () => {

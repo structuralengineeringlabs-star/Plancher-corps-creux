@@ -30,7 +30,7 @@
   <h1 class="t">Calculette EC2 Plancher Corps Creux</h1>
   <p class="st">Guide d'utilisation — plancher à poutrelles et entrevous, Eurocode 2</p>
   <p>NF EN 1992-1-1 · NF EN 1992-1-2 — poutrelle isostatique ou continue, note de calcul, plans A3 et DXF, nomenclature et métré.</p>
-  <div class="pied">Version 1.1.2 — octobre 2026<br>Structural &amp; Engineering Labs — structuralengineeringlabs@gmail.com — +237 651 135 605</div>
+  <div class="pied">Version 1.1.3 — octobre 2026<br>Structural &amp; Engineering Labs — structuralengineeringlabs@gmail.com — +237 651 135 605</div>
 </section>
 <section class="som"><h1 class="premier">Sommaire</h1><ol><li>1. Présentation</li><li>2. Prise en main</li><li>3. Géométrie et charges</li><li>4. Matériaux et armatures</li><li>5. Résistance au feu (option)</li><li>6. Résultats</li><li>7. Documents</li><li>8. Limites</li><li>9. Conseils</li></ol></section>
 <h1>1. Présentation</h1>
@@ -60,14 +60,14 @@
     inertie constante et Q ≤ max(2·G ; 5 kN/m²) ; un avertissement rouge signale le dépassement.</p>
     <p><strong>Section.</strong> Portée L entre axes d'appuis, entraxe b des poutrelles, largeur d'âme bw, hauteur du corps creux, dalle de compression hf (40 mm minimum en usage courant).
     La ligne de synthèse donne h, la largeur participante beff (§5.3.2.1) et la hauteur utile d.</p>
-    <p><strong>Charges.</strong> La catégorie d'usage fixe q<sub>k</sub> et ψ<sub>2</sub> (valeurs recommandées de l'EN 1991-1-1 et de l'EN 1990) ; avec « Annexe France » (paramètres nationaux, étape 2), la catégorie A passe à 1,5 kN/m² ; « Personnalisée » permet de saisir les valeurs des autres catégories de l'Annexe nationale.
+    <p><strong>Charges.</strong> La catégorie d'usage fixe q<sub>k</sub> et ψ<sub>2</sub> (valeurs recommandées de l'EN 1991-1-1 et de l'EN 1990) ; avec « Annexe France » (paramètres nationaux, étape 2), q<sub>k</sub> prend les valeurs du tableau 6.2 de la NF EN 1991-1-1/NA (A 1,5 ; B 2,5 ; C1 2,5 ; C2 et C3 4,0 ; D 5,0 kN/m²) ; « Personnalisée » permet de saisir une autre valeur.
     Chape, revêtement, faux plafond et cloisons sont en kN/m². Le <strong>poids des entrevous</strong> est estimé si la case reste à 0 (0,6 kN/m² pour 160 mm, proportionnel à la hauteur) :
     saisir la valeur de la fiche du fabricant pour un calcul définitif.</p>
     <p class="ex"><strong>Exemple traité</strong> — poutrelle continue (3 travées et plus), L = 4,00 m, entraxe 0,60 m, bw = 120 mm, entrevous 200 mm, dalle 40 mm
     (h = 240 mm), catégorie A, C25/30, B500. G = 5,50 kN/m², Q = 2,00 kN/m², pELU = 6,25 kN/m.</p>
 <h1>4. Matériaux et armatures</h1>
     <figure style="width:92%"><img src="../manuel/img/02-materiaux-armatures.png" alt="Étape 2 : matériaux et armatures"><figcaption>Étape 2 : matériaux et armatures</figcaption></figure>
-    <p><strong>Matériaux.</strong> Béton C20/25 à C50/60, acier B400 ou B500, paramètres nationaux (valeurs recommandées ou Annexe France : q<sub>k</sub> de la catégorie A et w<sub>max</sub> en XD/XS), classe d'exposition.
+    <p><strong>Matériaux.</strong> Béton C20/25 à C50/60, acier B400 ou B500, paramètres nationaux (valeurs recommandées ou Annexe France : q<sub>k</sub> et w<sub>max</sub>), classe d'exposition.
     L'<strong>enrobage nominal</strong> est calculé (classe structurale du tableau 4.3N, c<sub>min,dur</sub> du tableau 4.4N, Δc<sub>dev</sub> = 10 mm) : ici 25 mm. Les options avancées permettent de
     forcer la classe structurale, de saisir cnom, de régler cot θ, l'humidité relative, l'âge au chargement, la limite de flèche L/… et la prise en compte des cloisons fragiles (flèche nuisible L/500).</p>
     <p><strong>Armatures.</strong> Barres de travée, chapeaux (sur appui en poutrelle continue ; chapeaux de construction à chaque appui en isostatique), étriers. L'indicateur
@@ -114,7 +114,7 @@
     <ul><li>le poids des entrevous est estimé tant qu'il n'est pas saisi (valeur de la fiche du fabricant) ;</li>
     <li>la méthode forfaitaire n'est valable que dans son domaine (travées voisines comparables, Q ≤ max(2G ; 5 kN/m²)) ; l'étude détaillée de la continuité n'est pas faite ;</li>
     <li>la largeur d'appui n'est pas saisie : les ancrages sont dessinés sur la longueur lbd de part et d'autre de l'axe des appuis ;</li>
-    <li>les valeurs de l'Annexe nationale (q<sub>k</sub>, ψ, w<sub>max</sub>) sont les valeurs recommandées de l'EN, sauf choix « Annexe France » (catégorie A et w<sub>max</sub> uniquement) ou « Personnalisée » ;</li>
+    <li>les valeurs de l'Annexe nationale (q<sub>k</sub>, ψ, w<sub>max</sub>) sont les valeurs recommandées de l'EN, sauf choix « Annexe France » (q<sub>k</sub> du tableau 6.2NF, w<sub>max</sub> du tableau 7.1NF ; ψ inchangés) ou « Personnalisée » ;</li>
     <li>la résistance au feu repose sur les valeurs tabulées de la nervure, sans prise en compte des entrevous.</li></ul>
 <h1>9. Conseils</h1>
     <ul><li><strong>Verdict « non conforme »</strong> : ouvrir l'encadré « vérification(s) non satisfaite(s) » sous le bandeau, ou l'onglet « Vérifications » ; agir sur la ligne bloquante

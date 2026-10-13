@@ -1,5 +1,11 @@
 # Journal des modifications
 
+## v1.1.3 — Annexe France complète pour qk
+
+- « Annexe France » : qk du tableau 6.2 de la NF EN 1991-1-1/NA pour toutes les catégories (A 1,5 ; B 2,5 ; C1 2,5 ; C2 4,0 ; C3 4,0 ; D1 5,0 ; D2 5,0 ; E1 7,5 kN/m²),
+  en complément de wmax (tableau 7.1NF, vérifié sur le texte de l'Annexe). D1 passe à 5,0 kN/m² (recommandé : 4,0).
+- Test e2e « projet corrompu » : course corrigée sous WebKit (attente de l'enregistrement initial).
+
 ## v1.1.2 — Annexe nationale française et navigateurs
 
 - Option « Annexe France » étendue aux charges : catégorie A à qk = 1,5 kN/m² (NF EN 1991-1-1/NA, tableau 6.2) au lieu de 2,0 kN/m² ; ψ inchangés.
