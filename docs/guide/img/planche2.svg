@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297"><rect width="420" height="297" fill="#fff"/>
+<text x="15" y="28" font-size="3.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Nomenclature des aciers (une poutrelle)</text>
+<text x="16" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Rep.</text>
+<text x="28" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Désignation</text>
+<text x="156" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Forme</text>
+<text x="201" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Φ</text>
+<text x="213" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Nb</text>
+<text x="225" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">L (m)</text>
+<text x="249" y="36.3" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Masse (kg)</text>
+<rect x="15" y="32" width="261" height="28" fill="none" stroke="#0b111e" stroke-width="0.3"/>
+<line x1="27" y1="32" x2="27" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="155" y1="32" x2="155" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="200" y1="32" x2="200" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="212" y1="32" x2="212" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="224" y1="32" x2="224" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="248" y1="32" x2="248" y2="60" stroke="#0b111e" stroke-width="0.18"/>
+<line x1="15" y1="39" x2="276" y2="39" stroke="#0b111e" stroke-width="0.18"/>
+<text x="16" y="43.6" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">1</text>
+<text x="28" y="43.6" font-size="2.2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">HA12 – aciers de travée</text>
+<line x1="161" y1="42.5" x2="189" y2="42.5" stroke="#0b111e" stroke-width="0.4"/>
+<text x="201" y="43.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">12</text>
+<text x="213" y="43.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">2</text>
+<text x="225" y="43.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">4,97</text>
+<text x="249" y="43.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">8,8</text>
+<line x1="15" y1="46" x2="276" y2="46" stroke="#0b111e" stroke-width="0.18"/>
+<text x="16" y="50.6" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">2</text>
+<text x="28" y="50.6" font-size="2.2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">HA10 – chapeaux sur appui</text>
+<line x1="161" y1="49.5" x2="189" y2="49.5" stroke="#0b111e" stroke-width="0.4"/>
+<text x="201" y="50.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">10</text>
+<text x="213" y="50.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">2</text>
+<text x="225" y="50.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">2,00</text>
+<text x="249" y="50.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">2,5</text>
+<line x1="15" y1="53" x2="276" y2="53" stroke="#0b111e" stroke-width="0.18"/>
+<text x="16" y="57.6" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">3</text>
+<text x="28" y="57.6" font-size="2.2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">HA6 – étriers triangulaires fermés (2 brins), e = 15 cm</text>
+<line x1="161" y1="58.6" x2="175" y2="58.6" stroke="#0b111e" stroke-width="0.4"/>
+<line x1="161" y1="58.6" x2="168" y2="54.2" stroke="#0b111e" stroke-width="0.4"/>
+<line x1="175" y1="58.6" x2="168" y2="54.2" stroke="#0b111e" stroke-width="0.4"/>
+<text x="201" y="57.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">6</text>
+<text x="213" y="57.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">27</text>
+<text x="225" y="57.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">0,58</text>
+<text x="249" y="57.6" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">3,5</text>
+<text x="15" y="68" font-size="2.6" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Total : 14,7 kg d'acier pour une poutrelle de 4,00 m</text>
+<text x="15" y="82" font-size="3.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Métré</text>
+<text x="15" y="89" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Béton : 0,192 m³ (poutrelle et dalle, sur 4,00 m × entraxe 0,60 m)</text>
+<text x="15" y="94" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Acier : 14,7 kg — 6,14 kg/m² de plancher</text>
+<text x="15" y="99" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">   HA6 : 3,5 kg</text>
+<text x="15" y="104" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">   HA10 : 2,5 kg</text>
+<text x="15" y="109" font-size="2.4" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">   HA12 : 8,8 kg</text>
+<text x="185" y="82" font-size="3.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Hypothèses et résultats</text>
+<text x="185" y="89" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Béton C25/30 — acier B500 — exposition XC1 — cnom 25 mm</text>
+<text x="185" y="94" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Poutrelle continue (3 travées et plus, coefficients forfaitaires) — L = 4,00 m — entraxe 0,60 m</text>
+<text x="185" y="99" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Section : dalle hf = 40 mm, entrevous 200 mm, âme bw = 120 mm (h = 240 mm)</text>
+<text x="185" y="104" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Moments ELU : M+ = 10,0 kN·m en travée, M− = −6,3 kN·m sur appui — VEd = 13,8 kN</text>
+<text x="185" y="109" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Flèche à long terme : 5,1 mm — 27 / 27 vérifications satisfaites</text>
+<text x="185" y="114" font-size="2.3" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Verdict : CONFORME (pré-dimensionnement, à valider par un ingénieur structure)</text>
+<text x="15" y="130" font-size="3.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Notes</text>
+<text x="15" y="137" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Enrobage nominal 25 mm au nu des étriers (XC1, Δcdev = 10 mm).</text>
+<text x="15" y="142" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Ancrage des aciers de travée : lbd = 484 mm de part et d'autre de l'axe de chaque appui (barres droites).</text>
+<text x="15" y="147" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Étriers triangulaires fermés : crochet de fermeture à 135°, queue de 10Φ (EN ISO 3766 / NF A 35-027).</text>
+<text x="15" y="152" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Les chapeaux de rive d'une poutrelle continue sont des aciers de construction, non métrés.</text>
+<text x="15" y="157" font-size="2.3" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Cotes en millimètres, sauf mention contraire. Plan issu du pré-dimensionnement : à adapter aux plans de repérage du chantier.</text>
+<rect x="10" y="10" width="400" height="277" fill="none" stroke="#0b111e" stroke-width="0.3"/>
+<rect x="230" y="251" width="180" height="36" fill="none" stroke="#0b111e" stroke-width="0.3"/>
+<line x1="272" y1="251" x2="272" y2="287" stroke="#0b111e" stroke-width="0.25"/>
+<line x1="360" y1="251" x2="360" y2="287" stroke="#0b111e" stroke-width="0.25"/>
+<line x1="272" y1="263" x2="410" y2="263" stroke="#0b111e" stroke-width="0.25"/>
+<line x1="272" y1="275" x2="410" y2="275" stroke="#0b111e" stroke-width="0.25"/>
+<line x1="246.06217782649108" y1="272.5" x2="240" y2="276" stroke="#0b111e" stroke-width="0.5"/>
+<line x1="240" y1="276" x2="233.93782217350892" y2="272.5" stroke="#0b111e" stroke-width="0.5"/>
+<line x1="233.93782217350892" y1="272.5" x2="233.93782217350892" y2="265.5" stroke="#0b111e" stroke-width="0.5"/>
+<line x1="233.93782217350892" y1="265.5" x2="240" y2="262" stroke="#0b111e" stroke-width="0.5"/>
+<line x1="240" y1="262" x2="246.06217782649108" y2="265.5" stroke="#0b111e" stroke-width="0.5"/>
+<line x1="246.06217782649108" y1="265.5" x2="246.06217782649108" y2="272.5" stroke="#0b111e" stroke-width="0.5"/>
+<text x="240" y="270.2" font-size="3" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#0b111e">SEL</text>
+<text x="249" y="266" font-size="2.6" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">STRUCTURAL &amp;</text>
+<text x="249" y="270" font-size="2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">ENGINEERING LABS</text>
+<text x="274" y="256" font-size="1.8" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Projet</text>
+<text x="274" y="261" font-size="2.6" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Projet</text>
+<text x="274" y="268" font-size="1.8" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Titre</text>
+<text x="274" y="273" font-size="2.6" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Plancher P1 — Nomenclature, métré et hypothèses</text>
+<text x="274" y="280" font-size="2.2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Échelles : sans échelle</text>
+<text x="274" y="284.5" font-size="2" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Béton C25/30 · B500 · cnom 25 mm · XC1</text>
+<text x="362" y="256" font-size="1.8" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Référence</text>
+<text x="362" y="261" font-size="2.4" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">PL-2026-001 — Ind. A</text>
+<text x="362" y="268" font-size="2.1" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Dessiné : —</text>
+<text x="362" y="273" font-size="2.1" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">Vérifié : —</text>
+<text x="362" y="280" font-size="2.1" font-family="Arial, sans-serif" text-anchor="start" fill="#0b111e">A3 · 13/10/2026</text>
+<text x="362" y="284.5" font-size="2.1" font-family="Arial, sans-serif" font-weight="700" text-anchor="start" fill="#0b111e">Feuille 2 / 2 · v1.1.0</text>
+</svg>

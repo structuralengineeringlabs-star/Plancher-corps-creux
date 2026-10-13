@@ -14,6 +14,7 @@ import { contraintesFissureesRect, contraintesFissureesT, phiMaxFissuration } fr
 import { flecheCalculee } from './fleche';
 import { longueurAncrage } from './dispositions';
 import type { PlancherInput } from './types';
+import { resistanceFeu } from './feu';
 
 export interface CasValidation {
   id: string; domaine: string; article: string; grandeur: string; unite: string;
@@ -76,6 +77,11 @@ export const CAS: CasValidation[] = [
   { id: 'D1', domaine: 'Dispositions', article: '§8.4.4', grandeur: 'lbd, HA12, C25, B500, bonne adhérence', unite: 'mm', reference: (12 / 4) * (500 / 1.15) / (2.25 * 0.7 * 2.5649639 / 1.5), tolerance: 0.05, methode: 'Manuel : Φ/4·σsd/fbd, fbd = 2,25·fctk,0,05/γc', obtenu: () => longueurAncrage(12, 25, 500, true).lbd },
   { id: 'D2', domaine: 'Dispositions', article: '§9.2.1.4', grandeur: 'FE = 0,5·VEd·cot θ', unite: 'kN', reference: 0.5 * 13.761 * 2.5, tolerance: 1e-6, methode: 'Manuel', obtenu: () => defaut.tranchant.FE / 1e3 },
   { id: 'D3', domaine: 'Dispositions', article: '§8.2', grandeur: 'Étrier triangulaire : longueur développée (bw 120, h 240, c 25, Φ6)', unite: 'mm', reference: 70 + 2 * Math.sqrt(35 ** 2 + 190 ** 2) + 2 * 60, tolerance: 1e-6, methode: 'Manuel : A + 2·√((A/2)² + B²) + 2·10Φ', obtenu: () => defaut.nomenclature.reperes[2].longueur * 1000 },
+  // Résistance au feu (valeurs tabulées)
+  { id: 'R1', domaine: 'Feu', article: 'EN 1992-1-2 tab. 5.5', grandeur: 'a requis, appuis simples, R60, bw = 140 mm', unite: 'mm', reference: 37.5, tolerance: 1e-9, methode: 'Manuel : interpolation (120 ; 40) → (160 ; 35)', obtenu: () => resistanceFeu({ ...PAR_DEFAUT, bw: 140, appui: 'simple', feu: true, resistanceFeu: 60 }, 25)!.aRequis! },
+  { id: 'R2', domaine: 'Feu', article: 'EN 1992-1-2 tab. 5.6', grandeur: 'a requis, poutre continue, R60, bw = 120 mm', unite: 'mm', reference: 25, tolerance: 1e-9, methode: 'Manuel : première colonne (120 ; 25)', obtenu: () => resistanceFeu({ ...PAR_DEFAUT, feu: true, resistanceFeu: 60 }, 25)!.aRequis! },
+  { id: 'R3', domaine: 'Feu', article: 'EN 1992-1-2 §5.6.3', grandeur: 'a fourni, cnom 25, étrier Φ6, barres Φ12', unite: 'mm', reference: 25 + 6 + 6, tolerance: 1e-9, methode: 'Manuel : cnom + Φétrier + Φ/2', obtenu: () => resistanceFeu({ ...PAR_DEFAUT, feu: true }, 25)!.a },
+  { id: 'R4', domaine: 'Feu', article: 'EN 1992-1-2 §5.6.3(2)', grandeur: 'asd requis des barres d\'angle, appuis simples, R60, bw = 120 mm', unite: 'mm', reference: 50, tolerance: 1e-9, methode: 'Manuel : a + 10 = 40 + 10 (bw < 200 mm)', obtenu: () => resistanceFeu({ ...PAR_DEFAUT, appui: 'simple', feu: true, resistanceFeu: 60 }, 25)!.aCoinRequis! },
 ];
 
 export const ecart = (c: CasValidation) => c.obtenu() - c.reference;

@@ -6,7 +6,7 @@ sur appui, effort tranchant (étriers triangulaires fermés), ELS (contraintes, 
 retrait), dispositions constructives, nomenclature et métré, note de calcul paginée. Application sœur de
 « Poutres continues EC2 » et de « Dimensionnement des poteaux aux Eurocodes » (même base technique `src/eurocodes/`).
 
-Version **1.0.0** : refonte sur le modèle de l'application poutres (moteur pur testé, parcours en 4 étapes, projet
+Version **1.1.0** : refonte sur le modèle de l'application poutres (moteur pur testé, parcours en 4 étapes, projet
 multi-planchers, cahier de validation indépendant). La version précédente (Google AI Studio) est conservée dans `archive/`.
 
 ## Lancer l'application

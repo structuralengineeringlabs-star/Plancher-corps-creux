@@ -44,5 +44,6 @@ Versions auditées : « Aciers-Floor » v2.4 (export Google AI Studio, fichier `
 | R-03 | qk, ψ et wmax : valeurs recommandées de l'EN ; l'Annexe nationale peut différer (catégorie « personnalisée », option « Annexe France » pour wmax en XD/XS) | À confirmer sur le texte de l'AN |
 | R-04 | Poids des entrevous estimé (0,6 kN/m² pour 160 mm) ; hf ≥ 40 mm retenu comme règle d'usage non bloquante | Remplacer par la fiche du fabricant |
 | R-05 | Méthode forfaitaire : continuité des inerties et rapport des portées voisines non contrôlés (seul Q ≤ max(2G ; 5) l'est) | Information utilisateur |
-| R-06 | Résistance au feu (EN 1992-1-2), planches A3 et DXF, guide PDF | Lot 2 |
+| R-06 | Résistance au feu (EN 1992-1-2), planches A3 et DXF, guide PDF | **Levé en v1.1.0** (lot 2) : tableaux 5.5/5.6 de la nervure ; limites résiduelles : entrevous, critères E et I, dalle, tableaux §5.7 non traités (R-08) |
 | R-07 | Navigateurs : Chromium testé (4 formats d'écran) ; Firefox et Safari non testés | `PW_TOUS_NAVIGATEURS=1` |
+| R-08 | Feu : nervure traitée comme une poutre (tableaux 5.5/5.6) sans protection des entrevous ; tableaux des dalles nervurées (§5.7), critères E et I, dalle de compression non traités | À valider avec un spécialiste feu si la résistance au feu est déterminante |

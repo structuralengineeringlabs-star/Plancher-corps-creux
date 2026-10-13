@@ -4,19 +4,25 @@ import { calculerPlancher, fr, type ResultatPlancher } from '../plancher/calcul'
 import type { FichierProjet, Identification } from './store';
 import { Groupe, Liste } from './ui';
 import { CoupeTransversale, Elevation } from './dessins';
+import { planches, type Feuille } from '../plans/plan';
+import { PlanSVG, svgTexte } from '../plans/PlanSVG';
+import { exporterDXF } from '../plans/dxf';
 
 export const telecharger = (nom: string, contenu: string, type: string) => {
   const url = URL.createObjectURL(new Blob([contenu], { type }));
   const a = document.createElement('a'); a.href = url; a.download = nom; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
+const nomFichier = (id: Identification, repere: string) => `${id.reference}_${repere}`.replace(/[^\w.-]+/g, '_');
 const libelleVerdict = (v: string) => (v === 'OK' ? 'conforme' : v === 'KO' ? 'non conforme' : 'non vérifié');
 const couleurVerdict = (v: string) => (v === 'OK' ? 'text-green-700' : v === 'KO' ? 'text-red-600' : 'text-gray-500');
 
-export default function Documents({ r, projet, ouvrirNote }: { r: ResultatPlancher; id: Identification; projet: FichierProjet; ouvrirNote: (n: 'complet' | 'synthese') => void }) {
+export default function Documents({ r, id, projet, ouvrirNote, imprimerPlans }: { r: ResultatPlancher; id: Identification; projet: FichierProjet; ouvrirNote: (n: 'complet' | 'synthese') => void; imprimerPlans: () => void }) {
   const [niveau, setNiveau] = useState<'complet' | 'synthese'>('complet');
   const recap = useMemo(() => projet.planchers.map(p => ({ p, r: calculerPlancher(p.entree) })), [projet]);
   const N = r.nomenclature;
+  const repere = projet.planchers.find(p => p.id === projet.active)?.repere ?? id.repere;
+  const feuilles = useMemo(() => planches(r, id, repere), [r, id, repere]);
   return (
     <div className="grid gap-3 xl:grid-cols-[360px_1fr] items-start">
       <div>
@@ -24,6 +30,14 @@ export default function Documents({ r, projet, ouvrirNote }: { r: ResultatPlanch
           <Liste label="Niveau de détail" valeur={niveau} options={[{ v: 'complet', l: 'complète' }, { v: 'synthese', l: 'synthèse' }]} onChange={setNiveau} aide="Complète : toutes les équations avec leurs valeurs. Synthèse : résultats et vérifications." />
           <button onClick={() => ouvrirNote(niveau)} className="w-full h-9 rounded bg-primary text-white font-semibold text-[13px] mt-1">Ouvrir la note (imprimer / PDF)</button>
           <p className="text-[11.5px] text-gray-500">Page de garde, sommaire, listes, pagination « n / N », annexe des données et empreinte du calcul.</p>
+        </Groupe>
+        <Groupe titre="Plans d'exécution (A3)">
+          <p className="text-[12px] text-gray-600">{feuilles.length} planches : élévation à l'échelle, coupes, étrier, nomenclature, métré, cartouche.</p>
+          <div className="grid grid-cols-2 gap-2 mt-1">
+            <button onClick={() => telecharger(`${nomFichier(id, repere)}.dxf`, exporterDXF(feuilles), 'application/dxf')} className="h-9 rounded border border-primary text-primary font-semibold text-[13px]">DXF (CAO)</button>
+            <button onClick={imprimerPlans} className="h-9 rounded border border-primary text-primary font-semibold text-[13px]">Imprimer / PDF</button>
+          </div>
+          {feuilles.map(f => <button key={f.numero} onClick={() => telecharger(`${nomFichier(id, repere)}_F${f.numero}.svg`, svgTexte(f), 'image/svg+xml')} className="block text-[12px] text-primary mt-1">SVG feuille {f.numero} — {f.titre}</button>)}
         </Groupe>
         <Groupe titre="Métré">
           <p className="text-[12.5px] font-mono">Béton : {fr(N.volumeBeton, 3)} m³ (poutrelle et dalle, une travée)</p>
@@ -36,6 +50,9 @@ export default function Documents({ r, projet, ouvrirNote }: { r: ResultatPlanch
           <div className="flex flex-wrap gap-4 justify-center"><CoupeTransversale r={r} vue="travee" taille={240} /><CoupeTransversale r={r} vue="appui" taille={240} /></div>
           <div className="min-w-[640px]"><Elevation r={r} /></div>
         </div>
+        <Groupe titre="Aperçu des planches A3">
+          <div className="overflow-x-auto">{feuilles.map(f => <PlanSVG key={f.numero} f={f} className="w-full min-w-[720px] h-auto border border-gray-100 mb-2" />)}</div>
+        </Groupe>
         <Groupe titre="Nomenclature des aciers">
           <div className="overflow-x-auto">
             <table className="w-full text-[12.5px]"><thead className="bg-gray-50"><tr>{['Rep.', 'Désignation', 'Forme', 'Φ', 'Nb', 'L (m)', 'Masse (kg)'].map(h => <th key={h} className="text-left px-2 py-1">{h}</th>)}</tr></thead>
@@ -55,6 +72,23 @@ export default function Documents({ r, projet, ouvrirNote }: { r: ResultatPlanch
           </div>
         </Groupe>
       </div>
+    </div>
+  );
+}
+
+/** Mode impression des plans : planches A3 paysage, une par page. */
+export function ImpressionPlans({ feuilles, onFermer }: { feuilles: Feuille[]; onFermer: () => void }) {
+  return (
+    <div className="note-fond">
+      <style>{'@page { size: A3 landscape; margin: 0; } @media print { .plan-feuille { width: 420mm; height: 297mm; } }'}</style>
+      <div className="note-barre no-print">
+        <span className="font-semibold">Plans A3 — aperçu</span>
+        <div className="flex gap-2">
+          <button onClick={() => window.print()} className="bg-white text-gray-900 rounded px-3 h-8 text-[13px] font-semibold">Imprimer / PDF</button>
+          <button onClick={onFermer} className="border border-white/40 rounded px-3 h-8 text-[13px]">Fermer</button>
+        </div>
+      </div>
+      {feuilles.map(f => <div key={f.numero} className="plan-feuille bg-white mx-auto my-4 max-w-[1400px]"><PlanSVG f={f} className="w-full h-full" /></div>)}
     </div>
   );
 }

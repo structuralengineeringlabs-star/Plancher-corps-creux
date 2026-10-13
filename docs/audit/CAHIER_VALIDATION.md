@@ -1,6 +1,6 @@
 # Cahier de validation du moteur de calcul du plancher à corps creux
 
-Version 1.0.0 — généré automatiquement par `npm run validation` le 13/10/2026.
+Version 1.1.0 — généré automatiquement par `npm run validation` le 13/10/2026.
 
 Chaque cas compare la valeur du moteur (`src/plancher/`) à une référence indépendante du code :
 calcul manuel détaillé, ou modèle Python indépendant (`scripts/reference/plancher_reference.py`) :
@@ -46,5 +46,9 @@ Les exemples publiés (guides d'application de l'Eurocode 2) restent à ajouter 
 | D1 | Dispositions | §8.4.4 | lbd, HA12, C25, B500, bonne adhérence (mm) | 484,31 | 484,31 | −0,0000 | ±0,0500 | Manuel : Φ/4·σsd/fbd, fbd = 2,25·fctk,0,05/γc | ✅ |
 | D2 | Dispositions | §9.2.1.4 | FE = 0,5·VEd·cot θ (kN) | 17,201 | 17,201 | 0,0000 | ±0,0000 | Manuel | ✅ |
 | D3 | Dispositions | §8.2 | Étrier triangulaire : longueur développée (bw 120, h 240, c 25, Φ6) (mm) | 576,39 | 576,39 | 0,0000 | ±0,0000 | Manuel : A + 2·√((A/2)² + B²) + 2·10Φ | ✅ |
+| R1 | Feu | EN 1992-1-2 tab. 5.5 | a requis, appuis simples, R60, bw = 140 mm (mm) | 37,500 | 37,500 | 0,0000 | ±0,0000 | Manuel : interpolation (120 ; 40) → (160 ; 35) | ✅ |
+| R2 | Feu | EN 1992-1-2 tab. 5.6 | a requis, poutre continue, R60, bw = 120 mm (mm) | 25,000 | 25,000 | 0,0000 | ±0,0000 | Manuel : première colonne (120 ; 25) | ✅ |
+| R3 | Feu | EN 1992-1-2 §5.6.3 | a fourni, cnom 25, étrier Φ6, barres Φ12 (mm) | 37,000 | 37,000 | 0,0000 | ±0,0000 | Manuel : cnom + Φétrier + Φ/2 | ✅ |
+| R4 | Feu | EN 1992-1-2 §5.6.3(2) | asd requis des barres d'angle, appuis simples, R60, bw = 120 mm (mm) | 50,000 | 50,000 | 0,0000 | ±0,0000 | Manuel : a + 10 = 40 + 10 (bw < 200 mm) | ✅ |
 
-**Bilan : 36 / 36 cas conformes.**
+**Bilan : 40 / 40 cas conformes.**

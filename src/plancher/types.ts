@@ -49,6 +49,9 @@ export interface PlancherInput {
   /** Limite de flèche totale L/… (EN 1992-1-1 §7.4.1(4) : 250) et vérification de la flèche nuisible L/500 (§7.4.1(5)). */
   flecheLimite: number; cloisonsFragiles: boolean;
 
+  /** Résistance au feu de la nervure (EN 1992-1-2, valeurs tabulées) : vérification demandée et durée R (min). */
+  feu: boolean; resistanceFeu: number;
+
   nbTravee: number; phiTravee: number;
   nbAppui: number; phiAppui: number;
   phiEtrier: number; nBrins: number;
@@ -59,7 +62,7 @@ export interface ErreurSaisie { champ: string; message: string }
 
 export interface Verification {
   id: string;
-  groupe: 'Données' | 'ELU' | 'ELS' | 'Dispositions';
+  groupe: 'Données' | 'ELU' | 'ELS' | 'Dispositions' | 'Feu';
   libelle: string; valeur: string; limite: string;
   ok: boolean; bloquant: boolean; ref: string;
 }

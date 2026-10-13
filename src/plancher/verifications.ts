@@ -3,6 +3,7 @@
  */
 import type { ResultatPlancher } from './calcul';
 import type { Verdict, Verification } from './types';
+import { TAB_5_5, TAB_5_6 } from '../eurocodes/feu';
 
 type Partiel = Omit<ResultatPlancher, 'verifications' | 'verdict' | 'perimetre'>;
 
@@ -60,6 +61,17 @@ export function construireVerifications(r: Partiel): { verifications: Verificati
   if (e.cloisonsFragiles) V({ id: 'FN', groupe: 'ELS', libelle: 'Flèche nuisible (après pose des cloisons)', valeur: `${fr(fc.deltaNuisible, 1)} mm`, limite: `≤ L/500 = ${fr(fc.limiteNuisible, 1)} mm`, ok: fc.okNuisible, bloquant: true, ref: '§7.4.1(5)' });
   V({ id: 'LD', groupe: 'ELS', libelle: 'Élancement L/d (méthode simplifiée, indicative)', valeur: `L/d = ${fr(el.fleche.Ld, 1)}`, limite: `≤ ${fr(el.fleche.LdLimite, 1)} (K = ${fr(el.fleche.K, 1)}, F1 = ${fr(el.fleche.F1, 2)})`, ok: el.fleche.ok, bloquant: false, ref: '§7.4.2, éq. 7.16' });
 
+  // --- Résistance au feu (option) ---------------------------------------------------------------------------------------
+  if (r.feu) {
+    const f = r.feu, tab = `tableau ${f.tableau}`;
+    const R = `R${f.R}`;
+    V({ id: 'FEU-B', groupe: 'Feu', libelle: `Largeur de la nervure (${R})`, valeur: `bw = ${fr(f.b, 0)} mm`, limite: `≥ bmin = ${fr(f.bmin, 0)} mm (${tab})`, ok: f.aRequis !== null, bloquant: true, ref: `EN 1992-1-2 §5.6.3, ${tab}` });
+    V({ id: 'FEU-BW', groupe: 'Feu', libelle: `Épaisseur minimale de l'âme, classe WA (${R})`, valeur: `bw = ${fr(f.b, 0)} mm`, limite: `≥ ${fr(f.bwMin, 0)} mm`, ok: f.b >= f.bwMin, bloquant: true, ref: `EN 1992-1-2 §5.6.3, ${tab}` });
+    V({ id: 'FEU-A', groupe: 'Feu', libelle: `Distance de l'axe des armatures de travée au parement (${R})`, valeur: `a = ${fr(f.a, 1)} mm`, limite: f.aRequis === null ? 'non définie (bw < bmin)' : `≥ ${fr(f.aRequis, 1)} mm${f.cnomRequis !== null ? ` (cnom ≥ ${f.cnomRequis} mm)` : ''}`, ok: f.aRequis !== null && f.a >= f.aRequis - 1e-9, bloquant: true, ref: `EN 1992-1-2 §5.6.3, ${tab}` });
+    if (f.aCoinRequis !== null) V({ id: 'FEU-C', groupe: 'Feu', libelle: `Barres d'angle d'un lit unique (${R})`, valeur: `asd = ${fr(f.aCoinFourni ?? 0, 1)} mm`, limite: `≥ a + 10 = ${fr(f.aCoinRequis, 1)} mm (bw < ${fr(f.tableau === '5.5' ? TAB_5_5[f.R][2][0] : TAB_5_6[f.R][1][0], 0)} mm)`, ok: (f.aCoinFourni ?? 0) >= f.aCoinRequis - 1e-9, bloquant: true, ref: `EN 1992-1-2 §5.6.3(2), ${tab}` });
+    r.avertissements.push(`Résistance au feu ${R} : nervure assimilée à une poutre exposée sur trois faces (${tab}), sans prise en compte de la protection des entrevous ni des critères d'étanchéité (E) et d'isolation (I) de la dalle${cont ? " ; armatures sur appui (répartition sur 0,3·leff) non vérifiées" : ''}.`);
+  }
+
   // --- Avertissements -------------------------------------------------------------------------------------------------
   if (r.charges.poidsEntrevousAuto) r.avertissements.push("Poids des entrevous estimé (0,6 kN/m² pour 160 mm, proportionnel à la hauteur) : saisir la valeur de la fiche du fabricant pour un calcul définitif.");
   if (cont) r.avertissements.push(`Poutrelle continue : coefficients forfaitaires (travée ${fr(an.coef.travee, 1)}·M0, appui ${fr(an.coef.appui, 1)}·M0, tranchant ${fr(an.coef.tranchant, 2)}·V0). Les chapeaux des appuis de rive (0,15 de As travée, §9.2.1.2(1)) ne sont pas métrés.`);
@@ -75,12 +87,13 @@ export function construireVerifications(r: Partiel): { verifications: Verificati
     'Descente de charges et sollicitations (isostatique, ou continue par coefficients forfaitaires)',
     'Flexion ELU en travée et sur appui (§6.1)', 'Effort tranchant : bielles et étriers (§6.2)',
     'Dispositions constructives (§8.2, §8.4, §9.2)', 'Contraintes, fissuration sans calcul, flèche calculée et flèche nuisible (§7)',
+    ...(r.feu ? [`Résistance au feu R${r.feu.R} de la nervure par valeurs tabulées (EN 1992-1-2 §5.6)`] : []),
   ];
   const nonVerifie = [
     'Dalle de compression : treillis soudé de répartition et flexion transversale',
     'Charges concentrées, cloisons linéaires isolées, poinçonnement',
     'Étude détaillée de la continuité (travées inégales, appuis de rive)',
-    'Résistance au feu (EN 1992-1-2), séisme (EN 1998)',
+    ...(r.feu ? ['Feu : critères E et I, dalle de compression, entrevous, tableaux des dalles nervurées (§5.7) ; séisme (EN 1998)'] : ['Résistance au feu (EN 1992-1-2), séisme (EN 1998)']),
     'Appuis (poutres, murs) et vérification des entrevous',
   ];
   return { verifications: v, verdict, perimetre: { verifie, nonVerifie } };

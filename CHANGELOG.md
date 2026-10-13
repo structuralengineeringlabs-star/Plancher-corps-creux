@@ -1,5 +1,22 @@
 # Journal des modifications
 
+## v1.1.0 — Lot 2 : plans A3 et DXF, résistance au feu, guide PDF
+
+**Plans d'exécution (étape 4)**
+- Deux planches A3 : élévation de la poutrelle à l'échelle (aciers de travée, chapeaux, étriers, cotes, repères), coupes en travée et sur appui,
+  détail de l'étrier triangulaire fermé, nomenclature, métré, hypothèses et résultats, cartouche S.E.L.
+- Export **DXF** (R12, calques normalisés, une feuille A3 par bloc), SVG par feuille et impression A3 paysage / PDF ; même rendu que les poutres.
+
+**Résistance au feu (option, EN 1992-1-2)**
+- Valeurs tabulées de la nervure assimilée à une poutre : tableau 5.5 (isostatique) ou 5.6 (continue), durées R30 à R240 :
+  largeur bmin, épaisseur d'âme (classe WA), distance a de l'axe des barres au parement, barres d'angle d'un lit unique (a + 10 mm).
+- Vérifications bloquantes dans le verdict, enrobage requis indiqué, section dédiée dans la note de calcul, ligne dans les plans.
+- Non couvert (signalé dans le périmètre) : protection des entrevous, critères E et I, dalle de compression, tableaux des dalles nervurées (§5.7).
+- Cahier de validation : 4 cas (R1 à R4) ; 115 tests unitaires et 40 cas de validation.
+
+**Documentation**
+- Guide d'utilisation PDF (`docs/guide/`), généré par `npm run guide` à partir du moteur et de captures de l'application.
+
 ## v1.0.0 — Mise à jour sur le modèle POUTRES
 
 Refonte complète de l'application « Calculette EC2 Plancher Corps Creux » (v1.x issue de Google AI Studio, archivée).

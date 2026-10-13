@@ -133,3 +133,43 @@ test('étrier triangulaire dessiné et en-tête cohérent', async ({ page }) => 
   await expect(page.getByText(/étrier triangulaire fermé HA6, crochet 135°/).first()).toBeVisible();
   await expect(page.getByText(/vérifications · acier \d/)).toBeVisible();
 });
+
+test('plans A3 : aperçu, export DXF, impression', async ({ page }) => {
+  const erreurs = await demarrer(page);
+  await page.getByRole('tab', { name: ETAPES[3] }).click();
+  await expect(page.getByText("Plans d'exécution (A3)")).toBeVisible();
+  await expect(page.getByRole('img', { name: /Planche 1 : Élévation, coupes et étrier/ })).toBeVisible();
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'DXF (CAO)' }).click()]);
+  expect(dl.suggestedFilename()).toMatch(/\.dxf$/);
+  const dxf = readFileSync(await dl.path()!, 'utf8');
+  expect(dxf.startsWith('0\r\nSECTION')).toBe(true);
+  expect(dxf).toContain('ENTITIES');
+  expect(dxf.trimEnd().endsWith('EOF')).toBe(true);
+  expect(await debordement(page)).toBeLessThanOrEqual(1);
+  await page.getByRole('button', { name: 'Imprimer / PDF', exact: true }).click();
+  await expect(page.getByText('Plans A3 — aperçu')).toBeVisible();
+  await expect(page.locator('.plan-feuille')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Fermer' }).click();
+  await expect(page.getByRole('tab', { name: ETAPES[3] })).toBeVisible();
+  expect(erreurs).toEqual([]);
+});
+
+test('résistance au feu : option, durée, verdict et note de calcul', async ({ page }) => {
+  const erreurs = await demarrer(page);
+  await page.getByRole('tab', { name: ETAPES[1] }).click();
+  await expect(page.getByLabel('Durée de résistance au feu')).toHaveCount(0);
+  await page.getByLabel('Vérifier la résistance au feu (EN 1992-1-2)').check();
+  await expect(page.getByText('CONFORME', { exact: true })).toBeVisible(); // R60 continu : a = 37 ≥ 25 mm
+  await page.getByLabel('Durée de résistance au feu').selectOption('90');
+  await expect(page.getByText('NON CONFORME')).toBeVisible(); // bw 120 < bmin 150 mm
+  await page.getByRole('tab', { name: ETAPES[2] }).click();
+  await page.getByRole('tab', { name: 'Vérifications', exact: true }).click();
+  await expect(page.getByText("Largeur de la nervure (R90)", { exact: true })).toBeVisible();
+  await page.getByRole('tab', { name: ETAPES[1] }).click();
+  await page.getByLabel('Durée de résistance au feu').selectOption('60');
+  await expect(page.getByText('CONFORME', { exact: true })).toBeVisible();
+  await page.getByRole('tab', { name: ETAPES[3] }).click();
+  await page.getByRole('button', { name: 'Ouvrir la note (imprimer / PDF)' }).click();
+  await expect(page.getByRole('heading', { name: 'Résistance au feu' })).toBeVisible();
+  expect(erreurs).toEqual([]);
+});

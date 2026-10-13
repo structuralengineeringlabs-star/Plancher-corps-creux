@@ -40,5 +40,15 @@ Unités internes : N, mm, MPa, N·mm (1 kN/m = 1 N/mm). Saisie : m (portée, ent
 - Espacement libre des barres de travée (un lit dans l'âme, à l'intérieur des étriers) ≥ max(Φ ; dg + 5 ; 20 mm).
 - Ancrage lbd = α·lb,rqd (α = 1, sans réduction pour crochet ni confinement), lb,min = max(0,3·lb,rqd ; 10Φ ; 100 mm).
 
-## 7. Limites du périmètre
+## 7. Résistance au feu (option, EN 1992-1-2 §5.6)
+- Méthode des valeurs tabulées appliquée à la nervure, assimilée à une poutre exposée sur trois faces : tableau 5.5 (isostatique) ou 5.6 (continue), R30 à R240, interpolation linéaire de a selon bw entre les colonnes.
+- Distance de l'axe des barres de travée au parement : a = cnom + Φétrier + Φ/2 (un seul lit) ; barres d'angle : asd = a (même distance au parement latéral, base de l'étrier triangulaire à cnom du nu) ≥ a_requis + 10 mm si bw est inférieure à la colonne retenue du tableau.
+- Contrôles bloquants : bw ≥ bmin, bw ≥ bw,min (classe WA), a ≥ a_requis, asd ≥ a_requis + 10. L'enrobage nominal requis est indiqué.
+- Non couvert : protection des entrevous, critères E et I, dalle de compression, tableaux des dalles nervurées (§5.7), armatures sur appui d'une poutrelle continue.
+
+## 8. Plans d'exécution A3
+- Planche 1 : élévation à l'échelle 1/e (plus petite échelle normalisée telle que (L + 2·lbd)/e tienne dans la largeur utile), coupes en travée et sur appui, détail de l'étrier ; planche 2 : nomenclature, métré, hypothèses.
+- Primitives en millimètres de feuille rendues à l'identique en SVG, à l'impression (A3 paysage) et en DXF R12 (une feuille par bloc de 420 × 297 mm, calques CADRE, BETON, AXES, ACIER_INF, ACIER_SUP, CADRES, COTES, TEXTE, CARTOUCHE).
+
+## 9. Limites du périmètre
 Non vérifiés (signalés dans la note et sous le verdict) : treillis de la dalle de compression et flexion transversale ; charges concentrées, cloisons linéaires isolées, poinçonnement ; étude détaillée de la continuité (travées inégales, appuis de rive) ; résistance au feu (lot 2) ; séisme ; appuis et entrevous.

@@ -1,0 +1,130 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Calculette EC2 Plancher Corps Creux — Guide d'utilisation</title><style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Inter, 'Segoe UI', Arial, sans-serif; font-size: 10pt; line-height: 1.5; color: #111827; margin: 0; }
+  h1 { font-size: 14pt; margin: 0 0 6mm; padding-bottom: 2mm; border-bottom: 1px solid #111827; break-before: page; }
+  h1.premier { break-before: avoid; } h1 { break-after: avoid; }
+  p, li { text-align: justify; } ul, ol { padding-left: 6mm; }
+  code { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 9pt; background: #f3f4f6; padding: 0 1mm; }
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9pt; break-inside: avoid; }
+  th, td { border: 1px solid #cbd5e1; padding: 1.5mm 2mm; text-align: left; vertical-align: top; } th { background: #f1f5f9; }
+  td ul { margin: 0; padding-left: 4mm; } td li { text-align: left; }
+  figure { margin: 4mm auto; text-align: center; break-inside: avoid; } figure img { width: 100%; border: 1px solid #e5e7eb; }
+  figcaption { font-size: 8.5pt; color: #6b7280; margin-top: 1.5mm; }
+  .ex { background: #eff6ff; border-left: 3px solid #3a9bd5; padding: 2mm 3mm; }
+  .couv { min-height: 245mm; position: relative; break-after: page; }
+  .couv .logo { width: 70mm; } .couv h1.t { font-size: 28pt; border: 0; line-height: 1.15; margin: 70mm 0 6mm; break-before: avoid; }
+  .couv .st { color: #3a9bd5; font-weight: 700; font-size: 12pt; } .couv .pied { position: absolute; bottom: 0; left: 0; right: 0; border-top: 1px solid #111827; padding-top: 3mm; font-size: 9pt; }
+  .som { break-after: page; } .som li { list-style: none; margin: 1.5mm 0; font-size: 11pt; text-align: left; } .som ol { padding: 0; }
+</style></head><body>
+<section class="couv">
+  <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 48" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <path d="M24 4 L44 14 L44 34 L24 44 L4 34 L4 14 Z" fill="rgba(58,155,213,0.08)"/>
+  <path d="M24 4 L44 14 L44 34 L24 44 L4 34 L4 14 Z" fill="none" stroke="#3a9bd5" stroke-width="2.5"/>
+  <path d="M4 14 L44 34 M4 34 L44 14 M24 4 L24 44" stroke="#3a9bd5" stroke-opacity="0.4" stroke-width="0.5"/>
+  <rect x="16" y="18" width="16" height="12" rx="2" fill="#3a9bd5"/>
+  <text x="24" y="27.6" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle">S.E.L.</text>
+  <text x="56" y="24" font-size="20" font-weight="900" letter-spacing="-1" fill="#0b111e">STRUCTURAL <tspan fill="#3a9bd5" font-weight="700">&amp;</tspan></text>
+  <text x="57" y="38" font-size="10" font-weight="700" letter-spacing="3.6" fill="#6b8aaa">ENGINEERING LABS</text>
+</svg></div>
+  <h1 class="t">Calculette EC2 Plancher Corps Creux</h1>
+  <p class="st">Guide d'utilisation — plancher à poutrelles et entrevous, Eurocode 2</p>
+  <p>NF EN 1992-1-1 · NF EN 1992-1-2 — poutrelle isostatique ou continue, note de calcul, plans A3 et DXF, nomenclature et métré.</p>
+  <div class="pied">Version 1.1.0 — octobre 2026<br>Structural &amp; Engineering Labs — structuralengineeringlabs@gmail.com — +237 651 135 605</div>
+</section>
+<section class="som"><h1 class="premier">Sommaire</h1><ol><li>1. Présentation</li><li>2. Prise en main</li><li>3. Géométrie et charges</li><li>4. Matériaux et armatures</li><li>5. Résistance au feu (option)</li><li>6. Résultats</li><li>7. Documents</li><li>8. Limites</li><li>9. Conseils</li></ol></section>
+<h1>1. Présentation</h1>
+    <p>La <strong>Calculette EC2 Plancher Corps Creux</strong> dimensionne et vérifie une <strong>poutrelle représentative</strong> d'un plancher à corps creux
+    (poutrelles, entrevous, dalle de compression) selon la NF EN 1992-1-1 : sollicitations, flexion en travée et sur appui, effort tranchant,
+    états limites de service, dispositions constructives et, en option, résistance au feu (EN 1992-1-2). Elle produit la note de calcul,
+    la nomenclature des aciers, le métré et les plans d'exécution A3 (SVG, DXF, impression).</p>
+    <table><thead><tr><th>Domaine</th><th>Vérifications principales</th></tr></thead><tbody><tr><td>Sollicitations</td><td>Descente de charges (EN 1990, EN 1991-1-1), poutrelle isostatique ou continue (coefficients forfaitaires)</td></tr><tr><td>ELU</td><td>Flexion en section en T (travée) et rectangulaire (appui), ductilité, effort tranchant (bielles, étriers), traction à l'appui d'about</td></tr><tr><td>ELS</td><td>Contraintes en section fissurée, fissuration sans calcul (tableau 7.2N), flèche à long terme calculée (fluage, retrait), flèche nuisible L/500</td></tr><tr><td>Dispositions</td><td>As,min et As,max, espacement des barres, étriers (espacement, pourcentage), ancrage lbd, enrobage</td></tr><tr><td>Feu (option)</td><td>Valeurs tabulées de la nervure : largeur, âme, distance a de l'axe des armatures au parement, barres d'angle</td></tr></tbody></table>
+    <p>Le verdict en tête de page (<strong>CONFORME</strong>, <strong>NON CONFORME</strong>, <strong>NON VÉRIFIÉ</strong>) ne vaut que pour les vérifications
+    effectuées : l'onglet « Vérifications » liste ce qui est couvert et la note rappelle ce qui ne l'est pas (voir « Limites »).</p>
+<h1>2. Prise en main</h1>
+    <p>Le travail se fait en <strong>quatre étapes</strong>, accessibles par les onglets en haut de page :</p>
+    <ol><li><strong>Géométrie et charges</strong> : appuis, portée, entraxe, section, charges.</li>
+    <li><strong>Matériaux et armatures</strong> : béton, acier, exposition, résistance au feu (option), barres, chapeaux, étriers.</li>
+    <li><strong>Résultats</strong> : synthèse dessinée, efforts, flexion, effort tranchant, ELS, liste des vérifications.</li>
+    <li><strong>Documents</strong> : note de calcul, plans A3, DXF, nomenclature, métré, récapitulatif du projet.</li></ol>
+    <p>Le bandeau sous l'en-tête reste visible : verdict, moments et effort tranchant maximaux, flèche, nombre de vérifications satisfaites, masse d'acier.
+    Une valeur hors bornes est signalée en rouge et le verdict devient « non vérifié » tant qu'elle n'est pas corrigée.</p>
+    <p><strong>Projet.</strong> Un projet regroupe plusieurs planchers : « + Plancher », « Dupliquer », « Supprimer », liste déroulante pour passer de l'un à l'autre.
+    Le bouton « Projet » renseigne le cartouche (projet, client, référence, rédacteur, vérificateur, indice). Le projet est enregistré automatiquement dans le navigateur ;
+    « Enregistrer » produit un fichier <code>.plancher.json</code> à conserver, « Ouvrir… » le relit, « Nouveau » repart d'un projet vide.</p>
+    <figure style="width:92%"><img src="../manuel/img/11-projet.png" alt="Étape 1 avec le panneau « Projet » ouvert"><figcaption>Étape 1 avec le panneau « Projet » ouvert</figcaption></figure>
+<h1>3. Géométrie et charges</h1>
+    <figure style="width:92%"><img src="../manuel/img/01-geometrie-charges.png" alt="Étape 1 : géométrie et charges (exemple par défaut)"><figcaption>Étape 1 : géométrie et charges (exemple par défaut)</figcaption></figure>
+    <p><strong>Appuis.</strong> <em>Isostatique</em> : appuis simples. <em>Continue</em> : moments évalués par la méthode forfaitaire sur la travée de rive, la plus défavorable
+    (0,8·M0 en travée ; 0,5·M0 ou 0,6·M0 sur appui intermédiaire selon 3 travées et plus ou 2 travées ; tranchant majoré de 1,10 ou 1,15). La méthode suppose des travées voisines de portées comparables, une
+    inertie constante et Q ≤ max(2·G ; 5 kN/m²) ; un avertissement rouge signale le dépassement.</p>
+    <p><strong>Section.</strong> Portée L entre axes d'appuis, entraxe b des poutrelles, largeur d'âme bw, hauteur du corps creux, dalle de compression hf (40 mm minimum en usage courant).
+    La ligne de synthèse donne h, la largeur participante beff (§5.3.2.1) et la hauteur utile d.</p>
+    <p><strong>Charges.</strong> La catégorie d'usage fixe q<sub>k</sub> et ψ<sub>2</sub> (valeurs recommandées de l'EN 1991-1-1 et de l'EN 1990) ; « Personnalisée » permet de saisir les valeurs d'une Annexe nationale.
+    Chape, revêtement, faux plafond et cloisons sont en kN/m². Le <strong>poids des entrevous</strong> est estimé si la case reste à 0 (0,6 kN/m² pour 160 mm, proportionnel à la hauteur) :
+    saisir la valeur de la fiche du fabricant pour un calcul définitif.</p>
+    <p class="ex"><strong>Exemple traité</strong> — poutrelle continue (3 travées et plus), L = 4,00 m, entraxe 0,60 m, bw = 120 mm, entrevous 200 mm, dalle 40 mm
+    (h = 240 mm), catégorie A, C25/30, B500. G = 5,50 kN/m², Q = 2,00 kN/m², pELU = 6,25 kN/m.</p>
+<h1>4. Matériaux et armatures</h1>
+    <figure style="width:92%"><img src="../manuel/img/02-materiaux-armatures.png" alt="Étape 2 : matériaux et armatures"><figcaption>Étape 2 : matériaux et armatures</figcaption></figure>
+    <p><strong>Matériaux.</strong> Béton C20/25 à C50/60, acier B400 ou B500, paramètres nationaux (valeurs recommandées ou Annexe France pour w<sub>max</sub> en XD/XS), classe d'exposition.
+    L'<strong>enrobage nominal</strong> est calculé (classe structurale du tableau 4.3N, c<sub>min,dur</sub> du tableau 4.4N, Δc<sub>dev</sub> = 10 mm) : ici 25 mm. Les options avancées permettent de
+    forcer la classe structurale, de saisir cnom, de régler cot θ, l'humidité relative, l'âge au chargement, la limite de flèche L/… et la prise en compte des cloisons fragiles (flèche nuisible L/500).</p>
+    <p><strong>Armatures.</strong> Barres de travée, chapeaux (sur appui en poutrelle continue ; chapeaux de construction à chaque appui en isostatique), étriers. L'indicateur
+    « As requis / fourni » signale immédiatement une section insuffisante ; <strong>Proposer des armatures</strong> retient la plus petite section couvrant le besoin avec un espacement libre conforme.</p>
+    <p><strong>Étrier triangulaire fermé.</strong> Base A = bw − 2c, hauteur B = h − 2c, côtés inclinés C = √((A/2)² + B²), crochet de fermeture à 135° et queue de 10Φ.
+    Longueur développée = A + 2C + 2·10Φ = 576 mm dans l'exemple (A = 70, B = 190, C = 193 mm).</p>
+<h1>5. Résistance au feu (option)</h1>
+    <figure style="width:80%"><img src="../manuel/img/09-option-feu.png" alt="Option « Vérifier la résistance au feu » et durée R"><figcaption>Option « Vérifier la résistance au feu » et durée R</figcaption></figure>
+    <p>La case <strong>« Vérifier la résistance au feu (EN 1992-1-2) »</strong> de l'étape 2 active la méthode des <strong>valeurs tabulées</strong> (§5.6) : la nervure est assimilée à une poutre exposée sur trois faces,
+    tableau 5.5 en poutrelle isostatique, tableau 5.6 en poutrelle continue, pour les durées R30, R60, R90, R120, R180 et R240. Quatre contrôles bloquants entrent dans le verdict :</p>
+    <table><thead><tr><th>Contrôle</th><th>Exigence</th><th>Exemple R60, poutrelle continue</th></tr></thead><tbody><tr><td>Largeur de nervure</td><td>bw ≥ bmin du tableau</td><td>bw = 120 mm ≥ 120 mm</td></tr><tr><td>Épaisseur d'âme, classe WA</td><td>bw ≥ valeur minimale</td><td>bw = 120 mm ≥ 100 mm</td></tr><tr><td>Distance a de l'axe des barres de travée au parement</td><td>a ≥ a requis (interpolation sur bw)</td><td>a = cnom + Φétrier + Φ/2 = 37,0 mm ≥ 25,0 mm</td></tr><tr><td>Barres d'angle d'un lit unique</td><td>asd ≥ a + 10 mm si bw est inférieure à la colonne retenue</td><td>asd = 37,0 mm ≥ 35,0 mm</td></tr></tbody></table>
+    <p class="ex"><strong>Lecture.</strong> Le même plancher en poutrelle <em>isostatique</em> n'est plus conforme à R60 : a requis 40,0 mm et 50,0 mm pour les barres d'angle, alors que a = 37,0 mm ;
+    l'application indique l'enrobage nominal à retenir (cnom ≥ 38 mm). En R90 avec bw = 120 mm, le tableau n'est pas applicable (bw &lt; bmin = 150 mm) : élargir l'âme.</p>
+    <p><strong>Non couvert</strong> (rappelé dans le périmètre du verdict, la note et les observations) : protection éventuelle apportée par les entrevous, critères d'étanchéité (E) et d'isolation (I) de la dalle,
+    dalle de compression, tableaux des dalles nervurées (§5.7) et, en poutrelle continue, armatures sur appui. La note de calcul comporte une section « Résistance au feu » et les plans une ligne dédiée.</p>
+<h1>6. Résultats</h1>
+    <figure style="width:92%"><img src="../manuel/img/03-resultats-synthese.png" alt="Étape 3 : synthèse (coupes, élévation, nomenclature)"><figcaption>Étape 3 : synthèse (coupes, élévation, nomenclature)</figcaption></figure>
+    <p>La <strong>synthèse</strong> montre les coupes en travée et sur appui, l'élévation de la poutrelle (ancrages, chapeaux, étriers à l'espacement retenu) et la nomenclature.
+    Les autres onglets détaillent les efforts (diagrammes M et V), la flexion, l'effort tranchant, les ELS et la liste complète des vérifications.</p>
+    <figure style="width:92%"><img src="../manuel/img/06-resultats-verifications.png" alt="Onglet « Vérifications »"><figcaption>Onglet « Vérifications »</figcaption></figure>
+    <p>Une vérification marquée <strong>✗</strong> est bloquante et rend le verdict « non conforme » ; <strong>⚠</strong> signale un critère non bloquant, donné à titre indicatif (par exemple l'élancement L/d) ;
+    <strong>✓</strong> indique un critère satisfait. Chaque ligne cite l'article de la norme.</p>
+    <p class="ex"><strong>Exemple traité</strong> — 27 / 27 vérifications satisfaites, verdict CONFORME. M+ = 10,0 kN·m en travée, M− = −6,3 kN·m sur appui, VEd = 13,8 kN.
+    Flèche à long terme 5,1 mm (limite L/250 = 16,0 mm), flèche nuisible 4,7 mm (limite L/500 = 8,0 mm).
+    Acier 14,7 kg pour la poutrelle (6,14 kg/m²). Le même plancher en isostatique est non conforme : flèche nuisible 8,9 mm &gt; 8,0 mm.</p>
+    <figure style="width:80%"><img src="../manuel/img/05-resultats-els.png" alt="Onglet « ELS » : contraintes, fissuration, flèche"><figcaption>Onglet « ELS » : contraintes, fissuration, flèche</figcaption></figure>
+<h1>7. Documents</h1>
+    <figure style="width:60%"><img src="../manuel/img/10-documents-plans.png" alt="Étape 4 : note de calcul, plans d'exécution, nomenclature et métré"><figcaption>Étape 4 : note de calcul, plans d'exécution, nomenclature et métré</figcaption></figure>
+    <p><strong>Note de calcul.</strong> Complète (toutes les équations avec leurs valeurs) ou de synthèse : page de garde, sommaire, listes des figures et tableaux, périmètre du verdict, annexe des données d'entrée
+    et empreinte du calcul. « Imprimer / PDF » produit le document paginé « n / N ».</p>
+    <p><strong>Plans d'exécution A3.</strong> Deux planches, rendues à l'identique à l'écran, en SVG, à l'impression et en DXF :</p>
+    <ul><li><strong>Feuille 1</strong> — élévation de la poutrelle à l'échelle (échelle choisie selon la portée, ici 1/15) avec aciers de travée (repère 1), chapeaux (repère 2), étriers (repère 3), cotes d'ancrage et de longueur ;
+    coupes en travée et sur appui ; détail de l'étrier triangulaire fermé (A, B, C, crochet, développée).</li>
+    <li><strong>Feuille 2</strong> — nomenclature des aciers avec croquis de forme, métré, hypothèses et résultats principaux (et résistance au feu si l'option est active), notes.</li></ul>
+    <p>Chaque feuille porte le cartouche S.E.L. (projet, repère du plancher, référence et indice, dessinateur, vérificateur, date, « Feuille n / N », version). Le bouton <strong>DXF (CAO)</strong> exporte un fichier DXF R12 ASCII :
+    une feuille A3 par bloc de 420 × 297 mm, calques normalisés (CADRE, BETON, AXES, ACIER_INF, ACIER_SUP, CADRES, COTES, TEXTE, CARTOUCHE). Les accents et le symbole Φ sont convertis pour une lecture correcte dans les logiciels de CAO.</p>
+    <figure style="width:100%"><img src="img/planche1.png" alt="Planche 1"><figcaption>Planche 1 — élévation, coupes et étrier (exemple par défaut)</figcaption></figure>
+    <figure style="width:100%"><img src="img/planche2.png" alt="Planche 2"><figcaption>Planche 2 — nomenclature, métré et hypothèses</figcaption></figure>
+    <p><strong>Nomenclature et métré.</strong> Barres de travée, chapeaux, étriers : désignation, forme (00 barre droite, 01 barre à crochet), Φ, nombre, longueur développée, masse. Béton 0,192 m³ et acier 14,7 kg
+    pour une poutrelle de 4,00 m. Le <strong>récapitulatif du projet</strong> compare tous les planchers (portée, section, verdict, acier).</p>
+<h1>8. Limites</h1>
+    <p>L'application est un outil de <strong>pré-dimensionnement</strong> : toute étude d'exécution doit être validée par un ingénieur structure. Le verdict ne vaut que pour le périmètre ci-dessous.</p>
+    <table><thead><tr><th>Vérifié</th><th>Non couvert</th></tr></thead><tbody><tr><td><ul><li>Descente de charges et sollicitations (isostatique, ou continue par coefficients forfaitaires)</li><li>Flexion ELU en travée et sur appui (§6.1)</li><li>Effort tranchant : bielles et étriers (§6.2)</li><li>Dispositions constructives (§8.2, §8.4, §9.2)</li><li>Contraintes, fissuration sans calcul, flèche calculée et flèche nuisible (§7)</li></ul></td><td><ul><li>Dalle de compression : treillis soudé de répartition et flexion transversale</li><li>Charges concentrées, cloisons linéaires isolées, poinçonnement</li><li>Étude détaillée de la continuité (travées inégales, appuis de rive)</li><li>Résistance au feu (EN 1992-1-2), séisme (EN 1998)</li><li>Appuis (poutres, murs) et vérification des entrevous</li></ul></td></tr></tbody></table>
+    <p><strong>Points de vigilance</strong> :</p>
+    <ul><li>le poids des entrevous est estimé tant qu'il n'est pas saisi (valeur de la fiche du fabricant) ;</li>
+    <li>la méthode forfaitaire n'est valable que dans son domaine (travées voisines comparables, Q ≤ max(2G ; 5 kN/m²)) ; l'étude détaillée de la continuité n'est pas faite ;</li>
+    <li>la largeur d'appui n'est pas saisie : les ancrages sont dessinés sur la longueur lbd de part et d'autre de l'axe des appuis ;</li>
+    <li>les valeurs de l'Annexe nationale (q<sub>k</sub>, ψ, w<sub>max</sub>) sont les valeurs recommandées de l'EN, sauf choix « Annexe France » ou « Personnalisée » ;</li>
+    <li>la résistance au feu repose sur les valeurs tabulées de la nervure, sans prise en compte des entrevous.</li></ul>
+<h1>9. Conseils</h1>
+    <ul><li><strong>Verdict « non conforme »</strong> : ouvrir l'encadré « vérification(s) non satisfaite(s) » sous le bandeau, ou l'onglet « Vérifications » ; agir sur la ligne bloquante
+    (armatures, étriers, hauteur de plancher, enrobage).</li>
+    <li><strong>Flèche trop grande</strong> : augmenter la hauteur du corps creux, passer en poutrelle continue si la structure s'y prête, ajouter des aciers de travée ou réduire l'entraxe. La flèche nuisible L/500 est la plus sévère
+    quand des cloisons fragiles sont déclarées.</li>
+    <li><strong>Feu non satisfait</strong> : augmenter l'enrobage nominal (valeur indiquée), élargir l'âme ou réduire le diamètre des barres d'angle.</li>
+    <li><strong>Plusieurs planchers</strong> : dupliquer un plancher validé puis modifier la portée ; chaque plancher a son verdict et ses plans.</li>
+    <li><strong>Plans DXF</strong> : à ouvrir en unités millimètres ; les cotes affichent les valeurs réelles, les dessins sont à l'échelle de la feuille.</li></ul>
+    <p>Références : NF EN 1992-1-1 (§3, 4, 5.3.2.1, 6.1, 6.2, 7.2, 7.3, 7.4, 8.2, 8.4, 9.2), NF EN 1992-1-2 (§5.6), NF EN 1990, NF EN 1991-1-1.
+    Cahier de validation : 40 cas comparés à un calcul indépendant (Python) ou à un calcul manuel, tolérances explicites (<code>docs/audit/CAHIER_VALIDATION.md</code>).</p>
+</body></html>

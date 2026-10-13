@@ -18,4 +18,14 @@ test('captures du manuel', async ({ page }, info) => {
   await page.getByRole('tab', { name: '4. Documents' }).click(); await prise('07-documents');
   await page.getByRole('button', { name: 'Ouvrir la note (imprimer / PDF)' }).click();
   await prise('08-note-de-calcul');
+  await page.getByRole('button', { name: 'Fermer' }).click();
+  // Option feu et projet
+  await page.getByRole('tab', { name: '2. Matériaux et armatures' }).click();
+  await page.getByLabel('Vérifier la résistance au feu (EN 1992-1-2)').check();
+  await prise('09-option-feu');
+  await page.getByRole('tab', { name: '4. Documents' }).click();
+  await prise('10-documents-plans');
+  await page.getByRole('button', { name: 'Projet', exact: true }).click();
+  await page.getByRole('tab', { name: '1. Géométrie et charges' }).click();
+  await prise('11-projet');
 });

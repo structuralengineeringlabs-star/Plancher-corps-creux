@@ -1,7 +1,7 @@
 {
   "name": "plancher-corps-creux-ec2",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3002 --host=0.0.0.0",
@@ -14,6 +14,7 @@
     "site": "vite build --base /tools/plancher-corps-creux/ --outDir dist-sel && echo 'Construction pour sel-apps prête : dist-sel/'",
     "e2e": "playwright test --grep-invert \"captures du manuel\"",
     "manuel": "playwright test manuel --project=bureau",
+    "guide": "tsx scripts/guide.ts",
     "verifier": "npm run lint && npm test && npm run validation && npm run e2e"
   },
   "dependencies": {

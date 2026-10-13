@@ -4,6 +4,7 @@
  */
 import type { ErreurSaisie, PlancherInput } from './types';
 import { CLASSES_BETON, EXPOSITIONS, CATEGORIES } from './materiaux';
+import { DUREES_FEU } from './feu';
 
 export const PAR_DEFAUT: PlancherInput = {
   appui: 'continu', nbTravees: 3, portee: 4.0, entraxe: 0.6, bw: 120, hCorps: 200, hf: 40,
@@ -11,7 +12,7 @@ export const PAR_DEFAUT: PlancherInput = {
   chape: 1.2, revetement: 0.5, fauxPlafond: 0.2, cloisons: 1.0, poidsEntrevous: 0,
   fck: 25, fyk: 500, annexe: 'EC2', exposition: 'XC1', classeStructurale: 0, dureeVie100: false, controleProductionSpecial: false,
   deltaCdev: 10, enrobageMode: 'calcule', cnomSaisi: 25, dg: 16,
-  RH: 70, t0: 28, flecheLimite: 250, cloisonsFragiles: true,
+  RH: 70, t0: 28, flecheLimite: 250, cloisonsFragiles: true, feu: false, resistanceFeu: 60,
   nbTravee: 2, phiTravee: 12, nbAppui: 2, phiAppui: 10, phiEtrier: 6, nBrins: 2, cotTheta: 2.5,
 };
 
@@ -67,6 +68,8 @@ export function valider(p: PlancherInput): { erreurs: ErreurSaisie[]; entree: Pl
   if (!EXPOSITIONS.includes(e.exposition)) { erreurs.push({ champ: 'exposition', message: "Classe d'exposition inconnue." }); e.exposition = 'XC1'; }
   if (!CATEGORIES.some(c => c.code === e.categorie)) { erreurs.push({ champ: 'categorie', message: "Catégorie d'usage inconnue." }); e.categorie = 'A'; }
   if (e.annexe !== 'EC2' && e.annexe !== 'FR') e.annexe = 'EC2';
+  e.feu = e.feu === true;
+  if (!DUREES_FEU.includes(e.resistanceFeu)) { erreurs.push({ champ: 'resistanceFeu', message: 'Durée de résistance au feu : R30, R60, R90, R120, R180 ou R240.' }); e.resistanceFeu = 60; }
   if (e.enrobageMode !== 'calcule' && e.enrobageMode !== 'saisi') e.enrobageMode = 'calcule';
   if (!(e.classeStructurale === 0 || (Number.isInteger(e.classeStructurale) && e.classeStructurale >= 1 && e.classeStructurale <= 6))) {
     erreurs.push({ champ: 'classeStructurale', message: 'Classe structurale : automatique ou S1 à S6.' }); e.classeStructurale = 0;

@@ -20,6 +20,7 @@ import { effortTractionAppui, espacementLibre, longueurAncrage, type Espacement 
 import { nomenclature, type Nomenclature } from './nomenclature';
 import { flecheCalculee, type FlecheCalculee } from './fleche';
 import { coefficientFluage, retraitFinal } from '../eurocodes/fluageRetrait';
+import { resistanceFeu, type ResultatFeu } from './feu';
 import { construireVerifications } from './verifications';
 
 export const fr = (v: number, d = 2) => (Number.isFinite(v) ? v.toFixed(d).replace('.', ',').replace('-', '−') : '—');
@@ -50,6 +51,8 @@ export interface ResultatPlancher {
   disp: { espacement: Espacement; lbdTravee: number; lbdAppui: number; ancrageForfait40: boolean };
   courbes: { X: number[]; M: number[]; V: number[] };
   nomenclature: Nomenclature;
+  /** Résistance au feu de la nervure (null si l'option n'est pas activée). */
+  feu: ResultatFeu | null;
   verifications: Verification[]; verdict: Verdict;
   perimetre: { verifie: string[]; nonVerifie: string[] };
 }
@@ -144,6 +147,7 @@ export function calculerPlancher(brut: PlancherInput): ResultatPlancher {
   const partiel = {
     entree: e, erreurs, avertissements, mat, geo, charges: ch, analyse: an, travee, appui, tranchant,
     els: { travee: zoneT, appui: zoneA, fleche, flecheCalc }, disp, courbes: courbes(e, an), nomenclature: nom,
+    feu: resistanceFeu(e, mat.cNom),
   };
   const { verifications, verdict, perimetre } = construireVerifications(partiel);
   return { ...partiel, verifications, verdict, perimetre };

@@ -24,6 +24,7 @@ export default function Note({ r, id, niveau, onFermer }: { r: ResultatPlancher;
   const e = r.entree, m = r.mat, an = r.analyse, g = r.geo, ch = r.charges, tr = r.tranchant;
   const complet = niveau === 'complet';
   const cont = e.appui === 'continu';
+  const feu = r.feu;
   const sections: SectionNote[] = [
     { titre: 'Hypothèses et références', contenu: () => <>
       <p>NF EN 1990 (combinaison fondamentale 1,35·G + 1,5·Q), NF EN 1991-1-1, NF EN 1992-1-1:2005 et amendements ; paramètres {e.annexe === 'FR' ? "de l'Annexe nationale française (wmax)" : 'recommandés'}.
@@ -95,6 +96,16 @@ export default function Note({ r, id, niveau, onFermer }: { r: ResultatPlancher;
         <tr><td>Élancement L/d (indicatif)</td><td>{fr(r.els.fleche.Ld, 1)}</td><td>{fr(r.els.fleche.LdLimite, 1)}</td></tr>
       </tbody></table>)}
     </> },
+    ...(feu ? [{ titre: 'Résistance au feu', contenu: (o: Parameters<SectionNote['contenu']>[0]) => <>
+      <p>Valeurs tabulées de la NF EN 1992-1-2 (§5.6) : la nervure est assimilée à une poutre exposée sur trois faces ({feu.tableau === '5.5' ? 'tableau 5.5, appuis simples' : 'tableau 5.6, poutre continue'}), durée R{feu.R}. La protection des entrevous et les critères E et I ne sont pas pris en compte.</p>
+      {complet && o.eq('§5.6.3', <>a = cnom + Φétrier + Φ/2 = {fr(r.mat.cNom, 0)} + {e.phiEtrier} + {fr(e.phiTravee / 2, 0)} = {fr(feu.a, 1)} mm ; barres d'angle : asd ≥ a + 10 mm si bw est inférieure à la colonne retenue du tableau</>)}
+      {o.tab('Valeurs tabulées', <table className="note-t"><thead><tr><th>Grandeur</th><th>Fourni</th><th>Exigé</th></tr></thead><tbody>
+        <tr><td>Largeur de nervure bw (mm)</td><td>{fr(feu.b, 0)}</td><td>≥ {fr(feu.bmin, 0)} (bmin) et ≥ {fr(feu.bwMin, 0)} (classe WA)</td></tr>
+        <tr><td>Distance a de l'axe des barres au parement (mm)</td><td>{fr(feu.a, 1)}</td><td>{feu.aRequis === null ? 'non définie (bw < bmin)' : `≥ ${fr(feu.aRequis, 1)}`}</td></tr>
+        {feu.aCoinRequis !== null && <tr><td>Barres d'angle : asd (mm)</td><td>{fr(feu.aCoinFourni ?? 0, 1)}</td><td>≥ {fr(feu.aCoinRequis, 1)}</td></tr>}
+        <tr><td><strong>Conclusion</strong></td><td colSpan={2}><strong>{feu.ok ? `R${feu.R} satisfait` : `R${feu.R} non satisfait${feu.cnomRequis !== null ? ` — cnom ≥ ${feu.cnomRequis} mm` : ' — augmenter bw'}`}</strong></td></tr>
+      </tbody></table>)}
+    </> }] : []),
     { titre: 'Récapitulatif des vérifications', contenu: () => <>
       <ListeVerifications v={r.verifications} />
       {r.avertissements.length > 0 && <><h3>Observations</h3><ul>{r.avertissements.map((a, i) => <li key={i}>{a}</li>)}</ul></>}

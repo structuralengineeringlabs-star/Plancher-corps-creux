@@ -87,7 +87,7 @@ export function CoupeTransversale({ r, vue, taille = 380 }: { r: ResultatPlanche
       <text x={xc} y={y0 + h * s + 16} fontSize={10} textAnchor="middle" fill={C.gris}>entraxe b = {fr(b, 0)} — âme bw = {fr(bw, 0)} mm</text>
       <text x={x0 + 4} y={y0 + hf * s / 2 + 3} fontSize={9} fill={C.gris}>dalle hf = {fr(hf, 0)}</text>
       <text x={x0 + 4} y={y0 + hf * s + e.hCorps * s / 2} fontSize={9} fill={C.gris}>entrevous {fr(e.hCorps, 0)}</text>
-      <text x={xc} y={H - 14} fontSize={9.5} textAnchor="middle" fill={C.accent}>étrier triangulaire fermé HA{e.phiEtrier}, crochet 135° (queue 10Φ = {fr(et.crochet, 0)} mm)</text>
+      <text x={xc} y={H - 14} fontSize={9.5} textAnchor="middle" fill={C.accent}>étrier triangulaire fermé HA{e.phiEtrier}, crochet 135°</text>
       <text x={xc} y={12} fontSize={10.5} fontWeight={700} textAnchor="middle" fill={C.trait}>{vue === 'travee' ? `Coupe en travée — ${nbT} HA${e.phiTravee}` : `Coupe sur appui — ${nbA} HA${e.phiAppui} (chapeaux) + ${nbT} HA${e.phiTravee}`}</text>
     </svg>
   );

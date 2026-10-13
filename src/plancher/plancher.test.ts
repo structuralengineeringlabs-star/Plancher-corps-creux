@@ -255,3 +255,43 @@ describe('Proposition d\'armatures', () => {
     expect(proposerArmatures(r).travee).toBeNull();
   });
 });
+
+describe('Résistance au feu (option, EN 1992-1-2)', () => {
+  it("désactivée par défaut : aucune vérification « Feu » et périmètre inchangé", () => {
+    const r = cas({});
+    expect(r.feu).toBeNull();
+    expect(r.verifications.some(v => v.groupe === 'Feu')).toBe(false);
+    expect(r.perimetre.nonVerifie.some(x => x.startsWith('Résistance au feu'))).toBe(true);
+  });
+  it('poutrelle continue R60 (bw 120, a = 37 mm) : conforme, vérifications bloquantes présentes', () => {
+    const r = cas({ feu: true, resistanceFeu: 60 });
+    const f = r.verifications.filter(v => v.groupe === 'Feu');
+    expect(f.map(v => v.id)).toEqual(['FEU-B', 'FEU-BW', 'FEU-A', 'FEU-C']);
+    expect(f.every(v => v.ok && v.bloquant)).toBe(true);
+    expect(r.verdict).toBe('OK');
+    expect(r.perimetre.verifie.some(x => x.includes('R60'))).toBe(true);
+  });
+  it('poutrelle isostatique R60 : a = 37 < 40 mm → non conforme, enrobage requis indiqué', () => {
+    const r = cas({ appui: 'simple', portee: 3.2, feu: true, resistanceFeu: 60 });
+    expect(r.feu!.ok).toBe(false);
+    expect(r.feu!.cnomRequis).toBe(38);
+    expect(r.verifications.find(v => v.id === 'FEU-A')!.ok).toBe(false);
+    expect(r.verifications.find(v => v.id === 'FEU-C')!.ok).toBe(false);
+    expect(r.verdict).toBe('KO');
+  });
+  it('largeur d\'âme inférieure à bmin (R90, bw 120) : tableau non applicable, KO', () => {
+    const r = cas({ feu: true, resistanceFeu: 90 });
+    expect(r.feu!.aRequis).toBeNull();
+    expect(r.verifications.find(v => v.id === 'FEU-B')!.ok).toBe(false);
+    expect(r.verdict).toBe('KO');
+  });
+  it("augmenter l'enrobage corrige le cas isostatique R60", () => {
+    const r = cas({ appui: 'simple', portee: 3.2, feu: true, resistanceFeu: 60, enrobageMode: 'saisi', cnomSaisi: 40, bw: 160 });
+    expect(r.feu!.ok).toBe(true);
+  });
+  it('durée de résistance inconnue : erreur de saisie et valeur de repli', () => {
+    const v = valider({ ...PAR_DEFAUT, feu: true, resistanceFeu: 45 });
+    expect(v.erreurs.some(x => x.champ === 'resistanceFeu')).toBe(true);
+    expect(v.entree.resistanceFeu).toBe(60);
+  });
+});

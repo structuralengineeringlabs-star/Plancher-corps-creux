@@ -7,7 +7,8 @@ import ErrorBoundary from '../ErrorBoundary';
 import { EtapeArmatures, EtapeDonnees } from './Formulaire';
 import Resultats from './Resultats';
 import Note from './Note';
-import Documents from './Documents';
+import Documents, { ImpressionPlans } from './Documents';
+import { planches } from '../plans/plan';
 import { useProjet, type Identification } from './store';
 import { Dialogue, Onglets } from './ui';
 
@@ -21,12 +22,14 @@ export default function App() {
   const r = useMemo(() => calculerPlancher(p.entree), [p.entree]);
   const [etape, setEtape] = useState<Etape>(ETAPES[0]);
   const [note, setNote] = useState<null | 'complet' | 'synthese'>(null);
+  const [plans, setPlans] = useState(false);
   const [projetOuvert, setProjetOuvert] = useState(false);
   const [dialogue, setDialogue] = useState<null | 'nouveau' | 'supprimer'>(null);
   const fichier = useRef<HTMLInputElement>(null);
   const v = VERDICT[r.verdict];
   const bloquants = r.verifications.filter(x => x.bloquant && !x.ok);
 
+  if (plans) return <ImpressionPlans feuilles={planches(r, p.identification, p.plancher.repere)} onFermer={() => setPlans(false)} />;
   if (note) return <Note r={r} id={p.identification} niveau={note} onFermer={() => setNote(null)} />;
 
   const bouton = 'border border-white/25 rounded px-2.5 h-8 hover:bg-white/10';
@@ -95,7 +98,7 @@ export default function App() {
           {etape === ETAPES[0] && <EtapeDonnees e={p.entree} maj={p.maj} erreurs={r.erreurs} r={r} />}
           {etape === ETAPES[1] && <EtapeArmatures e={p.entree} maj={p.maj} erreurs={r.erreurs} r={r} appliquer={p.majPlusieurs} />}
           {etape === ETAPES[2] && <div className="bg-white border border-gray-200 rounded-lg p-3"><Resultats r={r} /></div>}
-          {etape === ETAPES[3] && <Documents r={r} id={p.identification} projet={p.projet} ouvrirNote={setNote} />}
+          {etape === ETAPES[3] && <Documents r={r} id={p.identification} projet={p.projet} ouvrirNote={setNote} imprimerPlans={() => setPlans(true)} />}
         </ErrorBoundary>
         {etape !== ETAPES[3] && (
           <div className="flex justify-between mt-3">

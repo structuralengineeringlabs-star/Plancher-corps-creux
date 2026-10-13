@@ -4,6 +4,7 @@ import type { ErreurSaisie, PlancherInput } from '../plancher/types';
 import { CATEGORIES, CLASSES_BETON, EXPOSITIONS, categorie } from '../plancher/materiaux';
 import { fr, type ResultatPlancher } from '../plancher/calcul';
 import { proposerArmatures } from '../plancher/proposition';
+import { DUREES_FEU } from '../plancher/feu';
 import { ChampNombre, Liste, Case, Groupe } from './ui';
 
 type Maj = <K extends keyof PlancherInput>(k: K, v: PlancherInput[K]) => void;
@@ -79,6 +80,9 @@ export function EtapeArmatures({ e, maj, erreurs, r, appliquer }: Props & { appl
             aide="Annexe France : wmax en XD/XS (tableau 7.1NF). Les autres paramètres restent ceux de l'EN." />
           <Liste label="Exposition" valeur={e.exposition} options={EXPOSITIONS.map(v => ({ v, l: v }))} onChange={v => maj('exposition', v)} />
           <p className="text-[11.5px] text-gray-600">Enrobage nominal : <strong>{fr(r.mat.cNom, 0)} mm</strong> ({e.enrobageMode === 'calcule' ? `calculé, ${e.exposition} S${r.mat.classeS}` : 'saisi'})</p>
+          <Case label="Vérifier la résistance au feu (EN 1992-1-2)" valeur={e.feu} onChange={v => maj('feu', v)} aide="Valeurs tabulées de la nervure assimilée à une poutre (tableaux 5.5 et 5.6) : largeur, distance de l'axe des armatures au parement. Protection des entrevous, critères E et I et dalle de compression non vérifiés." />
+          {e.feu && <Liste label="Durée de résistance au feu" valeur={e.resistanceFeu} options={DUREES_FEU.map(d => ({ v: d, l: `R${d}` }))} onChange={v => maj('resistanceFeu', v)} />}
+          {e.feu && r.feu && <p className={`text-[11.5px] font-mono ${r.feu.ok ? 'text-green-700' : 'text-red-600'}`}>a = {fr(r.feu.a, 1)} mm · requis {r.feu.aRequis === null ? 'bw < bmin' : `${fr(r.feu.aCoinRequis ?? r.feu.aRequis, 1)} mm`} {r.feu.ok ? '✓' : '✗'}</p>}
         </Groupe>
         <Groupe titre="Armatures"
           action={<button type="button" onClick={proposer} disabled={!proposition.travee} className="text-[12px] font-semibold text-primary disabled:opacity-40" title="Plus petite section de barres couvrant la section requise">Proposer des armatures</button>}>
