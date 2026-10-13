@@ -26,7 +26,7 @@ export function poidsEntrevousAuto(hCorps: number): number {
 }
 
 export function charges(e: PlancherInput): Charges {
-  const cat = categorie(e.categorie);
+  const cat = categorie(e.categorie, e.annexe);
   const qk = cat.qk === null ? e.qkPerso : cat.qk;
   const psi2 = cat.qk === null ? e.psi2Perso : cat.psi2;
   const b = e.entraxe, bw = e.bw / 1000, hf = e.hf / 1000, hw = e.hCorps / 1000;

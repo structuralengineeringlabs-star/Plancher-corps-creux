@@ -6,7 +6,7 @@ Unités internes : N, mm, MPa, N·mm (1 kN/m = 1 N/mm). Saisie : m (portée, ent
 - Poutrelle représentative de largeur tributaire b = entraxe ; section en T : dalle hf, âme bw, hauteur totale h = hf + hauteur du corps creux.
 - Poids propre : G0 = hf·25 + bw·hc·25/b + p_entrevous·(b − bw)/b (kN/m²). p_entrevous estimé à 0,6 kN/m² pour 160 mm,
   proportionnel à la hauteur, sauf saisie du fabricant (**hypothèse I**).
-- Charges permanentes rapportées : chape, revêtement, faux plafond, cloisons. Charge d'exploitation qk et ψ2 : EN 1991-1-1 tab. 6.2 / EN 1990 tab. A1.1 (valeurs recommandées ; « personnalisée » pour une Annexe nationale).
+- Charges permanentes rapportées : chape, revêtement, faux plafond, cloisons. Charge d'exploitation qk et ψ2 : EN 1991-1-1 tab. 6.2 / EN 1990 tab. A1.1 (valeurs recommandées ; avec « Annexe France », la catégorie A passe à qk = 1,5 kN/m², NF EN 1991-1-1/NA tab. 6.2, ψ inchangés ; « personnalisée » pour les autres catégories de l'Annexe nationale).
 - ELU : pELU = 1,35·g + 1,5·q ; ELS : caractéristique g + q ; quasi-permanente g + ψ2·q.
 
 ## 2. Sollicitations

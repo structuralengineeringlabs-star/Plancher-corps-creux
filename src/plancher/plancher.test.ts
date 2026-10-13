@@ -107,6 +107,15 @@ describe('Charges', () => {
     expect(charges({ ...PAR_DEFAUT, poidsEntrevous: 1 }).poidsEntrevousAuto).toBe(false);
     expect(charges({ ...PAR_DEFAUT, poidsEntrevous: 1 }).poidsEntrevous).toBe(1);
   });
+  it("Annexe France : catégorie A à 1,5 kN/m² (NF EN 1991-1-1/NA), autres catégories inchangées", () => {
+    const ec = charges({ ...PAR_DEFAUT, annexe: 'EC2' }), fr = charges({ ...PAR_DEFAUT, annexe: 'FR' });
+    expect(ec.qk).toBe(2.0);
+    expect(fr.qk).toBe(1.5);
+    expect(fr.q).toBeCloseTo(1.5 * PAR_DEFAUT.entraxe, 12);
+    expect(fr.psi2).toBe(0.3);
+    expect(charges({ ...PAR_DEFAUT, annexe: 'FR', categorie: 'B' }).qk).toBe(3.0);
+    expect(charges({ ...PAR_DEFAUT, annexe: 'FR', categorie: 'perso', qkPerso: 2.5 }).qk).toBe(2.5);
+  });
   it('catégorie personnalisée', () => {
     const c = charges({ ...PAR_DEFAUT, categorie: 'perso', qkPerso: 3.5, psi2Perso: 0.6 });
     expect(c.qk).toBe(3.5);

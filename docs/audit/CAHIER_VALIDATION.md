@@ -1,6 +1,6 @@
 # Cahier de validation du moteur de calcul du plancher à corps creux
 
-Version 1.1.1 — généré automatiquement par `npm run validation` le 13/10/2026.
+Version 1.1.2 — généré automatiquement par `npm run validation` le 13/10/2026.
 
 Chaque cas compare la valeur du moteur (`src/plancher/`) à une référence indépendante du code :
 calcul manuel détaillé, ou modèle Python indépendant (`scripts/reference/plancher_reference.py`) :

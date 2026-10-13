@@ -67,14 +67,14 @@ const SECTIONS: { titre: string; corps: string }[] = [
     inertie constante et Q ≤ max(2·G ; 5 kN/m²) ; un avertissement rouge signale le dépassement.</p>
     <p><strong>Section.</strong> Portée L entre axes d'appuis, entraxe b des poutrelles, largeur d'âme bw, hauteur du corps creux, dalle de compression hf (40 mm minimum en usage courant).
     La ligne de synthèse donne h, la largeur participante beff (§5.3.2.1) et la hauteur utile d.</p>
-    <p><strong>Charges.</strong> La catégorie d'usage fixe q<sub>k</sub> et ψ<sub>2</sub> (valeurs recommandées de l'EN 1991-1-1 et de l'EN 1990) ; « Personnalisée » permet de saisir les valeurs d'une Annexe nationale.
+    <p><strong>Charges.</strong> La catégorie d'usage fixe q<sub>k</sub> et ψ<sub>2</sub> (valeurs recommandées de l'EN 1991-1-1 et de l'EN 1990) ; avec « Annexe France » (paramètres nationaux, étape 2), la catégorie A passe à 1,5 kN/m² ; « Personnalisée » permet de saisir les valeurs des autres catégories de l'Annexe nationale.
     Chape, revêtement, faux plafond et cloisons sont en kN/m². Le <strong>poids des entrevous</strong> est estimé si la case reste à 0 (0,6 kN/m² pour 160 mm, proportionnel à la hauteur) :
     saisir la valeur de la fiche du fabricant pour un calcul définitif.</p>
     <p class="ex"><strong>Exemple traité</strong> — poutrelle continue (3 travées et plus), L = ${fr(r.entree.portee, 2)} m, entraxe ${fr(r.entree.entraxe, 2)} m, bw = ${r.entree.bw} mm, entrevous ${r.entree.hCorps} mm, dalle ${r.entree.hf} mm
     (h = ${r.geo.h} mm), catégorie A, ${libelleBeton(r.entree.fck)}, B${r.entree.fyk}. G = ${fr(r.charges.G0 + r.charges.Gp, 2)} kN/m², Q = ${fr(r.charges.qk, 2)} kN/m², pELU = ${fr(r.charges.pELU, 2)} kN/m.</p>` },
   { titre: 'Matériaux et armatures', corps: `
     ${img('02-materiaux-armatures.png', 'Étape 2 : matériaux et armatures', 92)}
-    <p><strong>Matériaux.</strong> Béton C20/25 à C50/60, acier B400 ou B500, paramètres nationaux (valeurs recommandées ou Annexe France pour w<sub>max</sub> en XD/XS), classe d'exposition.
+    <p><strong>Matériaux.</strong> Béton C20/25 à C50/60, acier B400 ou B500, paramètres nationaux (valeurs recommandées ou Annexe France : q<sub>k</sub> de la catégorie A et w<sub>max</sub> en XD/XS), classe d'exposition.
     L'<strong>enrobage nominal</strong> est calculé (classe structurale du tableau 4.3N, c<sub>min,dur</sub> du tableau 4.4N, Δc<sub>dev</sub> = 10 mm) : ici ${fr(r.mat.cNom, 0)} mm. Les options avancées permettent de
     forcer la classe structurale, de saisir cnom, de régler cot θ, l'humidité relative, l'âge au chargement, la limite de flèche L/… et la prise en compte des cloisons fragiles (flèche nuisible L/500).</p>
     <p><strong>Armatures.</strong> Barres de travée, chapeaux (sur appui en poutrelle continue ; chapeaux de construction à chaque appui en isostatique), étriers. L'indicateur
@@ -129,7 +129,7 @@ const SECTIONS: { titre: string; corps: string }[] = [
     <ul><li>le poids des entrevous est estimé tant qu'il n'est pas saisi (valeur de la fiche du fabricant) ;</li>
     <li>la méthode forfaitaire n'est valable que dans son domaine (travées voisines comparables, Q ≤ max(2G ; 5 kN/m²)) ; l'étude détaillée de la continuité n'est pas faite ;</li>
     <li>la largeur d'appui n'est pas saisie : les ancrages sont dessinés sur la longueur lbd de part et d'autre de l'axe des appuis ;</li>
-    <li>les valeurs de l'Annexe nationale (q<sub>k</sub>, ψ, w<sub>max</sub>) sont les valeurs recommandées de l'EN, sauf choix « Annexe France » ou « Personnalisée » ;</li>
+    <li>les valeurs de l'Annexe nationale (q<sub>k</sub>, ψ, w<sub>max</sub>) sont les valeurs recommandées de l'EN, sauf choix « Annexe France » (catégorie A et w<sub>max</sub> uniquement) ou « Personnalisée » ;</li>
     <li>la résistance au feu repose sur les valeurs tabulées de la nervure, sans prise en compte des entrevous.</li></ul>` },
   { titre: 'Conseils', corps: `
     <ul><li><strong>Verdict « non conforme »</strong> : ouvrir l'encadré « vérification(s) non satisfaite(s) » sous le bandeau, ou l'onglet « Vérifications » ; agir sur la ligne bloquante

@@ -16,3 +16,21 @@ jobs:
       - run: pip install numpy && npm run reference && git diff --exit-code scripts/reference/references.json
       - run: npx playwright install --with-deps chromium
       - run: npm run e2e
+  navigateurs:
+    # Firefox et WebKit (Safari) : mêmes tests de bout en bout, écran de bureau (R-07).
+    # Non bloquant tant qu'un premier passage n'a pas confirmé la parité avec Chromium.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        navigateur: [firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.navigateur }}
+      - run: npx playwright test --grep-invert "captures du manuel" --project=${{ matrix.navigateur }}
+        env:
+          PW_TOUS_NAVIGATEURS: '1'

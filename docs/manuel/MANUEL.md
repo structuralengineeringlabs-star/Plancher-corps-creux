@@ -12,7 +12,7 @@ les vérifications effectuées ; le périmètre est rappelé dans la note.
 
 - **Appuis** : poutrelle isostatique, ou continue (méthode forfaitaire sur la travée de rive ; 2 travées, ou 3 travées et plus).
 - **Portée L** entre axes d'appuis, **entraxe** des poutrelles, **âme bw**, **hauteur du corps creux**, **dalle de compression hf**.
-- **Charges** : catégorie d'usage (qk et ψ de l'EN 1991-1-1 ; « personnalisée » pour une Annexe nationale), chape, revêtement,
+- **Charges** : catégorie d'usage (qk et ψ de l'EN 1991-1-1 ; « Annexe France » : catégorie A à 1,5 kN/m² ; « personnalisée » pour les autres catégories de l'Annexe nationale), chape, revêtement,
   faux plafond, cloisons, poids des entrevous (0 = estimation à remplacer par la fiche du fabricant).
 
 ## 2. Matériaux et armatures

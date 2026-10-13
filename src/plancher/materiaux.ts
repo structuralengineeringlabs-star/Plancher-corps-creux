@@ -31,7 +31,15 @@ export const CATEGORIES: CategorieUsage[] = [
   { code: 'E1', libelle: 'E1 – Stockage', qk: 7.5, psi0: 1.0, psi1: 0.9, psi2: 0.8 },
   { code: 'perso', libelle: 'Valeurs personnalisées', qk: null, psi0: 0.7, psi1: 0.5, psi2: 0.3 },
 ];
-export const categorie = (code: string) => CATEGORIES.find(c => c.code === code) ?? CATEGORIES[0];
+/**
+ * Annexe nationale française (NF EN 1991-1-1/NA, tableau 6.2) : seule la catégorie A est modifiée ici (planchers : qk = 1,5 kN/m²,
+ * ψ inchangés). Les autres catégories gardent les valeurs recommandées : pour leurs valeurs nationales, utiliser « Personnalisée ».
+ */
+export const QK_FR_CATEGORIE_A = 1.5;
+export const categorie = (code: string, annexe: 'EC2' | 'FR' = 'EC2'): CategorieUsage => {
+  const c = CATEGORIES.find(x => x.code === code) ?? CATEGORIES[0];
+  return annexe === 'FR' && c.code === 'A' ? { ...c, qk: QK_FR_CATEGORIE_A } : c;
+};
 
 /** Seuils de résistance du tableau 4.3N (réduction de 1 de la classe structurale), par ligne d'exposition. */
 function seuilResistance(exposition: string): number {

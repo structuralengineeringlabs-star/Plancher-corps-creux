@@ -173,3 +173,14 @@ test('résistance au feu : option, durée, verdict et note de calcul', async ({ 
   await expect(page.getByRole('heading', { name: 'Résistance au feu' })).toBeVisible();
   expect(erreurs).toEqual([]);
 });
+
+test('Annexe France : la catégorie A passe à 1,5 kN/m²', async ({ page }) => {
+  const erreurs = await demarrer(page);
+  await expect(page.getByText('A – Habitation, planchers : qk = 2,00 kN/m²')).toBeVisible();
+  await page.getByRole('tab', { name: ETAPES[1] }).click();
+  await page.getByLabel('Paramètres nationaux').selectOption('FR');
+  await page.getByRole('tab', { name: ETAPES[0] }).click();
+  await expect(page.getByText('A – Habitation, planchers : qk = 1,50 kN/m²')).toBeVisible();
+  await expect(page.getByText('CONFORME', { exact: true })).toBeVisible();
+  expect(erreurs).toEqual([]);
+});

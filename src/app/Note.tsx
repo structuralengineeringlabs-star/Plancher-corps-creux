@@ -28,7 +28,7 @@ export default function Note({ r, id, niveau, onFermer }: { r: ResultatPlancher;
   const feu = r.feu;
   const sections: SectionNote[] = [
     { titre: 'Hypothèses et références', contenu: () => <>
-      <p>NF EN 1990 (combinaison fondamentale 1,35·G + 1,5·Q), NF EN 1991-1-1, NF EN 1992-1-1:2005 et amendements ; paramètres {e.annexe === 'FR' ? "de l'Annexe nationale française (wmax)" : 'recommandés'}.
+      <p>NF EN 1990 (combinaison fondamentale 1,35·G + 1,5·Q), NF EN 1991-1-1, NF EN 1992-1-1:2005 et amendements ; paramètres {e.annexe === 'FR' ? "de l'Annexe nationale française (qk de la catégorie A, wmax)" : 'recommandés'}.
         Une poutrelle représentative est étudiée, avec sa largeur tributaire (entraxe) ; section en T (dalle de compression participante, §5.3.2.1) ; {cont ? `poutrelle continue : méthode forfaitaire (travée de rive), applicable sous réserve de Q ≤ max(2·G ; 5 kN/m²), de travées voisines de portées comparables et d'une inertie constante` : 'poutrelle isostatique sur appuis simples'}.</p>
       <p><strong>Périmètre du verdict.</strong> Vérifié : {r.perimetre.verifie.join(' ; ')}. Non couvert : {r.perimetre.nonVerifie.join(' ; ')}.</p>
     </> },
