@@ -4,7 +4,7 @@
 
 - Option « Annexe France » étendue aux charges : catégorie A à qk = 1,5 kN/m² (NF EN 1991-1-1/NA, tableau 6.2) au lieu de 2,0 kN/m² ; ψ inchangés.
   Les autres catégories gardent les valeurs recommandées (« Personnalisée » pour celles de l'Annexe nationale). Défaut inchangé : valeurs recommandées.
-- Intégration continue GitHub Actions : tests unitaires, validation et e2e sur Chromium, Firefox et WebKit (`PW_TOUS_NAVIGATEURS=1`). 117 tests unitaires.
+- Intégration continue GitHub Actions : tests unitaires, validation et e2e sur Chromium, Firefox et WebKit (`PW_TOUS_NAVIGATEURS=1`) ; premier passage vert sur les trois navigateurs. 117 tests unitaires.
 
 ## v1.1.1 — Feu : ligne indicative pour la dalle de compression
 

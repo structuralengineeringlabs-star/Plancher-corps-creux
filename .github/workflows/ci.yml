@@ -18,9 +18,8 @@ jobs:
       - run: npm run e2e
   navigateurs:
     # Firefox et WebKit (Safari) : mêmes tests de bout en bout, écran de bureau (R-07).
-    # Non bloquant tant qu'un premier passage n'a pas confirmé la parité avec Chromium.
+    # Premier passage du 13/10/2026 : tous les tests e2e passent sur Firefox et WebKit ; le job est bloquant.
     runs-on: ubuntu-latest
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
