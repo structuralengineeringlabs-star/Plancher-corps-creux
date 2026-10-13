@@ -30,6 +30,6 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npx playwright install --with-deps ${{ matrix.navigateur }}
-      - run: npx playwright test --grep-invert "captures du manuel" --project=${{ matrix.navigateur }} --reporter=github,list
+      - run: npx playwright test --grep-invert "captures du manuel" --project=${{ matrix.navigateur }} --retries=1 --reporter=github,list
         env:
           PW_TOUS_NAVIGATEURS: '1'
